@@ -1,235 +1,1032 @@
-<h1>소비 반성 일기 프로젝트 상세 WBS (12주차 기준)</h1>
-<ul>
-<li>프로젝트: 소비 반성 일기 (지출 챌린지)</li>
-<li>기준 시점: 12주차</li>
-<li>전체 목표 진척률: 50%</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>대분류(Level 1)</th>
-<th>중분류(Level 2)</th>
-<th>세부 작업(Level 3)</th>
-<th>주차</th>
-<th>우선순위</th>
-<th>상태</th>
-<th>산출물</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>기획</td>
-<td>문제정의</td>
-<td>타깃 사용자 페르소나 정의</td>
-<td>10주차</td>
-<td>Must</td>
-<td>✅</td>
-<td>페르소나 문서</td>
-</tr>
-<tr>
-<td>기획</td>
-<td>문제정의</td>
-<td>Pain Point 3가지 도출</td>
-<td>10주차</td>
-<td>Must</td>
-<td>✅</td>
-<td>문제정의 표</td>
-</tr>
-<tr>
-<td>기획</td>
-<td>요구사항</td>
-<td>MVP 기능 목록 확정</td>
-<td>10주차</td>
-<td>Must</td>
-<td>✅</td>
-<td>기능 목록표</td>
-</tr>
-<tr>
-<td>기획</td>
-<td>요구사항</td>
-<td>비기능 요구사항(안정성/시연성) 정리</td>
-<td>10주차</td>
-<td>Should</td>
-<td>✅</td>
-<td>NFR 체크리스트</td>
-</tr>
-<tr>
-<td>설계</td>
-<td>아키텍처</td>
-<td>Layered 구조(P→A→D→Data) 설계</td>
-<td>11주차</td>
-<td>Must</td>
-<td>✅</td>
-<td>구조도/설계안</td>
-</tr>
-<tr>
-<td>설계</td>
-<td>아키텍처</td>
-<td>의존성 규칙 정의(단방향)</td>
-<td>11주차</td>
-<td>Must</td>
-<td>✅</td>
-<td>규칙 문서</td>
-</tr>
-<tr>
-<td>설계</td>
-<td>상태관리</td>
-<td>Riverpod 상태 흐름 설계</td>
-<td>11주차</td>
-<td>Must</td>
-<td>✅</td>
-<td>상태 흐름도</td>
-</tr>
-<tr>
-<td>설계</td>
-<td>UI/UX</td>
-<td>홈 화면 와이어프레임 작성</td>
-<td>11주차</td>
-<td>Must</td>
-<td>✅</td>
-<td>와이어프레임</td>
-</tr>
-<tr>
-<td>개발</td>
-<td>Domain</td>
-<td>ConsumptionItem 엔티티 구현</td>
-<td>12주차</td>
-<td>Must</td>
-<td>✅</td>
-<td>도메인 코드</td>
-</tr>
-<tr>
-<td>개발</td>
-<td>Data</td>
-<td>In-Memory Repository 구현</td>
-<td>12주차</td>
-<td>Must</td>
-<td>✅</td>
-<td>데이터 코드</td>
-</tr>
-<tr>
-<td>개발</td>
-<td>Application</td>
-<td>ViewModel(StateNotifier) 구현</td>
-<td>12주차</td>
-<td>Must</td>
-<td>✅</td>
-<td>애플리케이션 코드</td>
-</tr>
-<tr>
-<td>개발</td>
-<td>Presentation</td>
-<td>챌린지 카드/리스트 UI 구현</td>
-<td>12주차</td>
-<td>Must</td>
-<td>✅</td>
-<td>화면 코드</td>
-</tr>
-<tr>
-<td>개발</td>
-<td>Presentation</td>
-<td>입력 BottomSheet + 실시간 반영 구현</td>
-<td>12주차</td>
-<td>Must</td>
-<td>🚧</td>
-<td>입력 플로우</td>
-</tr>
-<tr>
-<td>테스트</td>
-<td>기능 검증</td>
-<td>위젯 테스트 1차(렌더링/폼 오픈)</td>
-<td>12주차</td>
-<td>Should</td>
-<td>🚧</td>
-<td>테스트 코드</td>
-</tr>
-<tr>
-<td>테스트</td>
-<td>품질 검증</td>
-<td>예외 시나리오 테스트(빈 입력/금액)</td>
-<td>13주차</td>
-<td>Must</td>
-<td>⏳</td>
-<td>테스트 케이스</td>
-</tr>
-<tr>
-<td>테스트</td>
-<td>품질 검증</td>
-<td>통합 테스트(등록 후 목록 반영)</td>
-<td>13주차</td>
-<td>Should</td>
-<td>⏳</td>
-<td>통합 테스트</td>
-</tr>
-<tr>
-<td>배포</td>
-<td>문서화</td>
-<td>중간발표 Marp 슬라이드 고도화</td>
-<td>12주차</td>
-<td>Must</td>
-<td>✅</td>
-<td>interim.md</td>
-</tr>
-<tr>
-<td>배포</td>
-<td>문서화</td>
-<td>상세 WBS/발표 대본 정리</td>
-<td>12주차</td>
-<td>Must</td>
-<td>✅</td>
-<td>02-wbs.md</td>
-</tr>
-<tr>
-<td>배포</td>
-<td>최적화</td>
-<td>로컬 DB 전환(인메모리 대체)</td>
-<td>14주차</td>
-<td>Should</td>
-<td>⏳</td>
-<td>저장소 전환 코드</td>
-</tr>
-<tr>
-<td>배포</td>
-<td>최종</td>
-<td>15주차 최종 시연 리허설 및 제출</td>
-<td>15주차</td>
-<td>Must</td>
-<td>⏳</td>
-<td>최종 패키지</td>
-</tr>
-</tbody></table>
-<h2>상태 집계</h2>
-<table>
-<thead>
-<tr>
-<th>상태</th>
-<th align="right">항목 수</th>
-<th align="right">비율</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>✅ 완료</td>
-<td align="right">10</td>
-<td align="right">50%</td>
-</tr>
-<tr>
-<td>🚧 진행</td>
-<td align="right">2</td>
-<td align="right">10%</td>
-</tr>
-<tr>
-<td>⏳ 예정</td>
-<td align="right">8</td>
-<td align="right">40%</td>
-</tr>
-<tr>
-<td>합계</td>
-<td align="right">20</td>
-<td align="right">100%</td>
-</tr>
-</tbody></table>
-<h2>검수 포인트</h2>
-<ul>
-<li>Must 항목 우선 완수 정책 적용</li>
-<li>12주차 시연 안정성을 위해 In-Memory 데이터 소스 고정</li>
-<li>13~15주차는 품질 강화(테스트/저장소 전환/최종 리허설)에 집중</li>
-</ul>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Univ Planner — 최종 발표</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Noto+Serif+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg-2: #12121a;
+    --ink: #f5f5f7;
+    --ink-dim: #a1a1aa;
+    --accent: #818cf8;
+    --accent-2: #c084fc;
+    --accent-warm: #fbbf24;
+    --line: rgba(255,255,255,0.08);
+    --line-strong: rgba(255,255,255,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Pretendard', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(129,140,248,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(192,132,252,0.06) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .grain {
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .deck {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    z-index: 2;
+  }
+
+  /* visibility 방식으로 변경 — Mermaid가 숨긴 슬라이드도 렌더링하도록 */
+  .slide {
+    position: absolute;
+    inset: 0;
+    padding: 64px 88px;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+
+  .slide.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+  }
+
+  .slide.active .reveal {
+    animation: reveal 0.6s ease forwards;
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  .slide.active .reveal:nth-child(2) { animation-delay: 0.08s; }
+  .slide.active .reveal:nth-child(3) { animation-delay: 0.16s; }
+  .slide.active .reveal:nth-child(4) { animation-delay: 0.24s; }
+  .slide.active .reveal:nth-child(5) { animation-delay: 0.32s; }
+
+  @keyframes reveal {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+  }
+
+  /* ===== SLIDE 1: COVER ===== */
+  .cover {
+    justify-content: center;
+    padding: 64px 100px;
+  }
+
+  .cover-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    margin-bottom: 28px;
+  }
+
+  .cover-title {
+    font-family: 'Noto Serif KR', 'Pretendard', serif;
+    font-weight: 900;
+    font-size: clamp(60px, 8.5vw, 130px);
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    margin-bottom: 24px;
+  }
+
+  .cover-title em {
+    font-style: normal;
+    font-weight: 300;
+    color: var(--accent);
+  }
+
+  .cover-sub {
+    font-size: 24px;
+    color: var(--ink-dim);
+    max-width: 700px;
+    line-height: 1.5;
+    margin-bottom: 60px;
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--ink-dim);
+  }
+
+  .cover-meta span strong { color: var(--ink); font-weight: 600; }
+
+  /* ===== SLIDE 2: VISION & PROBLEM ===== */
+  .h2 {
+    font-family: 'Noto Serif KR', 'Pretendard', serif;
+    font-size: clamp(38px, 4.5vw, 60px);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    margin-bottom: 32px;
+    flex-shrink: 0;
+  }
+
+  .h2 em { font-style: normal; color: var(--accent); font-weight: 300; }
+
+  .vision-layout {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 0;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .vision-divider {
+    background: var(--line);
+    margin: 0 40px;
+  }
+
+  .vision-col { display: flex; flex-direction: column; gap: 16px; }
+
+  .vision-col-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .vision-col-label.problem { color: #f87171; }
+  .vision-col-label.solution { color: #34d399; }
+
+  .stat-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .stat-num {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 900;
+    line-height: 1;
+    color: #f87171;
+    letter-spacing: -0.04em;
+    flex-shrink: 0;
+  }
+
+  .stat-desc {
+    font-size: 15px;
+    color: var(--ink-dim);
+    line-height: 1.4;
+  }
+
+  .stat-desc strong { color: var(--ink); display: block; font-size: 17px; margin-bottom: 2px; }
+
+  .solution-card {
+    padding: 18px 20px;
+    background: rgba(52,211,153,0.06);
+    border: 1px solid rgba(52,211,153,0.2);
+    border-radius: 6px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .solution-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: rgba(52,211,153,0.15);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    color: #34d399;
+    font-size: 16px;
+  }
+
+  .solution-text { font-size: 16px; line-height: 1.5; color: var(--ink); }
+  .solution-text small { display: block; color: var(--ink-dim); font-size: 13px; margin-top: 4px; }
+
+  /* ===== SLIDE 3: WBS ===== */
+  .wbs-wrap {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .wbs-wrap .mermaid {
+    width: 100%;
+    max-height: 100%;
+  }
+
+  .wbs-wrap svg {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  /* ===== SLIDE 4: FEATURES ===== */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .feature {
+    padding: 22px 20px;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .feature::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .feature:hover::before { transform: scaleX(1); }
+  .feature:hover { border-color: var(--line-strong); transform: translateY(-2px); }
+
+  .feature-icon {
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    width: 40px; height: 40px;
+    margin-bottom: 14px;
+    border-radius: 10px;
+    background: rgba(129,140,248,0.08);
+    border: 1px solid rgba(129,140,248,0.2);
+    color: var(--accent);
+  }
+
+  .feature-icon svg {
+    width: 20px; height: 20px;
+    stroke: currentColor; fill: none;
+    stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+  }
+
+  .feature-title { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+  .feature-desc { font-size: 13px; color: var(--ink-dim); line-height: 1.5; }
+
+  /* ===== SLIDE 5: TECH / ARCHITECTURE ===== */
+  .tech-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 48px;
+    align-items: start;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .stack-list { display: flex; flex-direction: column; gap: 0; }
+
+  .stack-row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: baseline;
+  }
+
+  .stack-row .key {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .stack-row .val { font-size: 19px; font-weight: 600; }
+  .stack-row .val small { display: block; font-size: 12px; color: var(--ink-dim); font-weight: 400; margin-top: 3px; }
+
+  .arch-mermaid-wrap {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .arch-mermaid-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-dim);
+    letter-spacing: 0.15em;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .arch-mermaid-wrap .mermaid {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .arch-mermaid-wrap .mermaid svg {
+    max-width: 100%;
+    max-height: 340px;
+  }
+
+  /* ===== SLIDE 6: DEMO ===== */
+  .demo-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 48px;
+    align-items: center;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .phone-mockup {
+    aspect-ratio: 9 / 19;
+    max-height: 480px;
+    margin: 0 auto;
+    background: var(--bg-2);
+    border: 8px solid #1a1a24;
+    border-radius: 36px;
+    padding: 20px 14px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(129,140,248,0.15);
+    position: relative;
+  }
+
+  .phone-mockup::before {
+    content: '';
+    position: absolute;
+    top: 8px; left: 50%;
+    transform: translateX(-50%);
+    width: 70px; height: 5px;
+    background: #0a0a0f;
+    border-radius: 4px;
+  }
+
+  .phone-header { font-size: 16px; font-weight: 700; margin: 14px 0 12px 4px; }
+
+  .phone-section-title {
+    font-size: 9px; font-weight: 600; color: var(--accent);
+    margin: 10px 4px 5px; letter-spacing: 0.1em;
+  }
+
+  .phone-card {
+    background: rgba(129,140,248,0.08);
+    border-radius: 7px;
+    padding: 9px 10px;
+    margin-bottom: 5px;
+    display: flex; align-items: center; gap: 9px;
+  }
+
+  .phone-card-dot {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+    font-size: 9px; color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 600;
+  }
+
+  .phone-card-dot.warn { background: #f59e0b; }
+  .phone-card-dot.success { background: #10b981; }
+
+  .phone-card-dot svg {
+    width: 11px; height: 11px;
+    stroke: white; fill: none;
+    stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+  }
+
+  .phone-card-text { font-size: 10px; color: var(--ink); line-height: 1.3; }
+  .phone-card-text small { display: block; font-size: 8px; color: var(--ink-dim); margin-top: 2px; }
+
+  .phone-nav {
+    margin-top: auto;
+    display: flex; justify-content: space-around;
+    padding-top: 10px; border-top: 1px solid var(--line);
+    font-size: 8px; color: var(--ink-dim);
+  }
+
+  .phone-nav span.active { color: var(--accent); font-weight: 600; }
+
+  .demo-points h3 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 36px; font-weight: 700;
+    margin-bottom: 20px; line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+
+  .demo-points h3 em { color: var(--accent); font-style: normal; font-weight: 300; }
+
+  .demo-points ul { list-style: none; padding: 0; }
+
+  .demo-points li {
+    padding: 13px 0; border-top: 1px solid var(--line);
+    font-size: 16px; color: var(--ink);
+    display: flex; gap: 16px; align-items: baseline;
+  }
+
+  .demo-points li:last-child { border-bottom: 1px solid var(--line); }
+  .demo-points li .num { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 11px; font-weight: 700; }
+  .demo-points li small { display: block; color: var(--ink-dim); font-size: 12px; margin-top: 4px; }
+
+  /* ===== SLIDE 7: CLOSING ===== */
+  .closing {
+    justify-content: center;
+    align-items: flex-start;
+    padding: 64px 100px;
+  }
+
+  .closing-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; color: var(--accent);
+    letter-spacing: 0.25em; margin-bottom: 28px;
+  }
+
+  .closing-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(60px, 8vw, 110px);
+    font-weight: 900; line-height: 1.1;
+    letter-spacing: -0.04em; margin-bottom: 24px;
+  }
+
+  .closing-title em { font-style: normal; color: var(--accent); font-weight: 300; }
+
+  .closing-sub { font-size: 22px; color: var(--ink-dim); margin-bottom: 56px; }
+
+  .closing-info {
+    display: flex; gap: 56px;
+    padding-top: 32px; border-top: 1px solid var(--line);
+  }
+
+  .closing-info-item {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; color: var(--ink-dim);
+  }
+
+  .closing-info-item strong {
+    display: block; color: var(--ink);
+    font-size: 18px; margin-bottom: 4px;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 600; letter-spacing: -0.01em;
+  }
+
+  /* ===== CONTROLS ===== */
+  .controls {
+    position: fixed;
+    bottom: 24px; right: 32px;
+    display: flex; align-items: center; gap: 16px;
+    z-index: 100;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .counter { font-size: 12px; color: var(--ink-dim); letter-spacing: 0.1em; }
+  .counter strong { color: var(--ink); font-size: 14px; }
+
+  .nav-btn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--line-strong);
+    background: var(--bg-2); color: var(--ink);
+    cursor: pointer; font-size: 16px;
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .nav-btn:hover { background: var(--accent); border-color: var(--accent); }
+
+  .progress {
+    position: fixed; top: 0; left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    z-index: 101;
+    transition: width 0.3s ease;
+  }
+
+  /* 타이머 표시 */
+  .timer-badge {
+    position: fixed;
+    bottom: 28px; left: 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--ink-dim);
+    letter-spacing: 0.08em;
+    z-index: 100;
+    display: flex; align-items: center; gap: 12px;
+  }
+
+  .timer-display {
+    font-size: 22px; font-weight: 700;
+    color: var(--ink); letter-spacing: 0.05em;
+  }
+
+  .timer-display.warn { color: var(--accent-warm); }
+  .timer-display.danger { color: #f87171; }
+
+  .timer-btn {
+    padding: 4px 10px;
+    border: 1px solid var(--line-strong);
+    border-radius: 4px;
+    background: var(--bg-2);
+    color: var(--ink-dim);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .timer-btn:hover { background: var(--accent); border-color: var(--accent); color: white; }
+
+  /* ===== Mermaid 전역 오버라이드 ===== */
+  .mermaid svg {
+    background: transparent !important;
+    font-family: 'Pretendard', sans-serif !important;
+  }
+
+  @media (max-width: 1024px) {
+    .slide { padding: 40px 48px; }
+    .feature-grid { grid-template-columns: repeat(2, 1fr); }
+    .tech-layout, .demo-layout, .vision-layout { grid-template-columns: 1fr; gap: 24px; }
+    .vision-divider { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="progress" id="progress"></div>
+
+<div class="deck" id="deck">
+
+  <!-- ============ SLIDE 1: COVER ============ -->
+  <!-- 8초 -->
+  <section class="slide cover active" data-time="8">
+    <div class="reveal cover-eyebrow">FINAL PRESENTATION · 2026</div>
+    <h1 class="reveal cover-title">Univ<br><em>Planner.</em></h1>
+    <p class="reveal cover-sub">
+      흩어진 학사 정보를 손바닥 위에서 하나로.<br>
+      대학생을 위한 올인원 학사 관리 앱.
+    </p>
+    <div class="reveal cover-meta">
+      <span><strong>플랫폼</strong> &nbsp;Flutter · iOS · Android</span>
+      <span><strong>발표자</strong> &nbsp;이준오</span>
+      <span><strong>기간</strong> &nbsp;1주</span>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 2: VISION & PROBLEM ============ -->
+  <!-- 25초 | 말: "대학생은 매 학기 시간표·과제·출결·학점을 각각 다른 앱에서 관리합니다. Univ Planner는 이 모든 것을 하나의 앱으로 통합합니다." -->
+  <section class="slide" data-time="25">
+    <div class="reveal label">01 · VISION & PROBLEM</div>
+    <h2 class="reveal h2">대학생은 <em>5개 앱</em>을 띄워두고 있다.</h2>
+
+    <div class="reveal vision-layout">
+      <!-- LEFT: PROBLEM -->
+      <div class="vision-col">
+        <div class="vision-col-label problem">● 문제 (Before)</div>
+
+        <div class="stat-row">
+          <div class="stat-num">5</div>
+          <div class="stat-desc">
+            <strong>앱을 동시에 사용</strong>
+            에브리타임 · 노션 · 학교사이트 · 계산기 · 메모앱
+          </div>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat-num">25%</div>
+          <div class="stat-desc">
+            <strong>결석 한도</strong>
+            초과 여부를 계산기로 직접 두드려야 함
+          </div>
+        </div>
+
+        <div class="stat-row" style="border-bottom:none">
+          <div class="stat-num">D-?</div>
+          <div class="stat-desc">
+            <strong>과제 마감 파악 불가</strong>
+            산발된 채널로 마감일을 자꾸 놓침
+          </div>
+        </div>
+      </div>
+
+      <div class="vision-divider"></div>
+
+      <!-- RIGHT: SOLUTION / VISION -->
+      <div class="vision-col">
+        <div class="vision-col-label solution">● 비전 (After)</div>
+
+        <div class="solution-card">
+          <div class="solution-icon">📅</div>
+          <div class="solution-text">
+            <strong>시간표 + 학사일정</strong>
+            <small>주간 시간표와 캘린더를 한 앱에서</small>
+          </div>
+        </div>
+
+        <div class="solution-card">
+          <div class="solution-icon">⚠️</div>
+          <div class="solution-text">
+            <strong>출결 자동 경고</strong>
+            <small>안전 · 주의 · 위험 3단계, 25% 한도 실시간 계산</small>
+          </div>
+        </div>
+
+        <div class="solution-card">
+          <div class="solution-icon">🎯</div>
+          <div class="solution-text">
+            <strong>학점 + 과제 한곳에</strong>
+            <small>GPA 자동 계산 · D-Day 마감 알림</small>
+          </div>
+        </div>
+
+        <div class="solution-card" style="margin-top:4px; border-color: rgba(129,140,248,0.3); background: rgba(129,140,248,0.06);">
+          <div class="solution-icon" style="background: rgba(129,140,248,0.15); color: var(--accent);">✦</div>
+          <div class="solution-text">
+            <strong style="color: var(--accent);">오프라인 완전 동작</strong>
+            <small>네트워크 없이도 모든 기능 — Hive 로컬 DB</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 3: WBS ============ -->
+  <!-- 20초 | 말: "프로젝트 전체 작업을 WBS로 정리했습니다. 기획-설계-개발-테스트-배포 5단계로 진행했으며, 개발 단계에서 6개 기능을 병렬로 구현했습니다." -->
+  <section class="slide" data-time="20">
+    <div class="reveal label">02 · WBS — Work Breakdown Structure</div>
+    <div class="reveal wbs-wrap">
+      <div class="mermaid">
+mindmap
+  root((Univ<br>Planner))
+    기획
+      요구사항 분석
+      기능 선정<br>6종
+      ADR 문서화
+    설계
+      아키텍처<br>Layered+MVVM
+      데이터 모델<br>Hive Schema
+      UI 와이어프레임
+    개발
+      홈 화면
+      시간표
+      학사일정
+      출결 계산기
+      학점 계산기
+      과제 메모
+    테스트
+      단위 테스트<br>3종
+      경계값 검증
+    배포
+      GitHub Pages<br>발표자료
+      실기기<br>시연
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 4: FEATURES ============ -->
+  <!-- 20초 | 말: "6개 기능을 하나의 앱에 담았습니다. 각 화면은 하단 네비게이션으로 즉시 접근 가능합니다." -->
+  <section class="slide" data-time="20">
+    <div class="reveal label">03 · WHAT IT DOES</div>
+    <h2 class="reveal h2">한 앱, <em>여섯 가지</em> 약속.</h2>
+
+    <div class="reveal feature-grid">
+      <div class="feature">
+        <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a2 2 0 0 1-2 2h-3v-7h-8v7H5a2 2 0 0 1-2-2V9.5z"/></svg></span>
+        <div class="feature-title">홈</div>
+        <div class="feature-desc">오늘 수업 · 마감 임박 과제 · 이번 주 일정을 한눈에</div>
+      </div>
+      <div class="feature">
+        <span class="feature-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 14h2M14 14h2M8 18h2M14 18h2"/></svg></span>
+        <div class="feature-title">시간표</div>
+        <div class="feature-desc">주간 시간표 등록과 색상 커스터마이즈</div>
+      </div>
+      <div class="feature">
+        <span class="feature-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg></span>
+        <div class="feature-title">학사일정</div>
+        <div class="feature-desc">시험·휴일·학사 일정 캘린더 등록</div>
+      </div>
+      <div class="feature">
+        <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+        <div class="feature-title">출결 계산기</div>
+        <div class="feature-desc">안전→주의→위험 3단계 · 지각 3회=결석 1회 · 25% 한도</div>
+      </div>
+      <div class="feature">
+        <span class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+        <div class="feature-title">학점 계산기</div>
+        <div class="feature-desc">A+~F 9단계 · 4.5 만점 GPA 자동 계산</div>
+      </div>
+      <div class="feature">
+        <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M9 2h6a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M8 12h8M8 16h6M8 8h.01"/></svg></span>
+        <div class="feature-title">과제 메모</div>
+        <div class="feature-desc">마감일 · 우선순위 · D-Day 표시</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 5: TECH + MERMAID ARCHITECTURE ============ -->
+  <!-- 25초 | 말: "Flutter + Riverpod + Hive로 구성했습니다. 아키텍처는 Layered + MVVM 4계층으로, Presentation에서 Domain으로 단방향 의존성을 유지합니다." -->
+  <section class="slide" data-time="25">
+    <div class="reveal label">04 · ARCHITECTURE</div>
+    <h2 class="reveal h2">4계층 <em>단방향</em> 의존성.</h2>
+
+    <div class="reveal tech-layout">
+      <div class="stack-list">
+        <div class="stack-row">
+          <span class="key">PLATFORM</span>
+          <span class="val">Flutter <small>iOS · Android 단일 코드베이스</small></span>
+        </div>
+        <div class="stack-row">
+          <span class="key">STATE</span>
+          <span class="val">Riverpod <small>선언형 상태 관리</small></span>
+        </div>
+        <div class="stack-row">
+          <span class="key">STORAGE</span>
+          <span class="val">Hive <small>오프라인 로컬 DB</small></span>
+        </div>
+        <div class="stack-row">
+          <span class="key">PATTERN</span>
+          <span class="val">Layered + MVVM <small>4계층 단방향 의존성</small></span>
+        </div>
+        <div class="stack-row">
+          <span class="key">UI</span>
+          <span class="val">Material 3 <small>시스템 다크모드 자동 연동</small></span>
+        </div>
+      </div>
+
+      <div class="arch-mermaid-wrap">
+        <div class="arch-mermaid-title">DATA FLOW — MERMAID</div>
+        <div class="mermaid">
+graph TD
+    W["🖼️ Widget\n(Presentation)"]
+    VM["⚙️ ViewModel\n(Riverpod Provider)"]
+    UC["🧠 UseCase\n(Domain)"]
+    REPO["📦 Repository\n(Interface)"]
+    H[("💾 Hive\nLocal DB")]
+
+    W -- "user action" --> VM
+    VM -- "execute" --> UC
+    UC -- "call" --> REPO
+    REPO -- "read/write" --> H
+    H -- "data" --> REPO
+    REPO -- "entity" --> UC
+    UC -- "result" --> VM
+    VM -- "state update" --> W
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 6: DEMO ============ -->
+  <!-- 15초 | 말: "홈 화면 하나에서 오늘 수업, 임박 과제, 학사일정을 모두 확인할 수 있습니다. 완전 오프라인 동작입니다." -->
+  <section class="slide" data-time="15">
+    <div class="reveal label">05 · DEMO</div>
+    <h2 class="reveal h2">홈 한 화면이 <em>모든 것</em>을 모은다.</h2>
+
+    <div class="reveal demo-layout">
+      <div class="phone-mockup">
+        <div class="phone-header">홈</div>
+        <div class="phone-section-title">오늘의 수업</div>
+        <div class="phone-card">
+          <div class="phone-card-dot">10</div>
+          <div class="phone-card-text">운영체제<small>10:00~12:00 · 공대 401호</small></div>
+        </div>
+        <div class="phone-card">
+          <div class="phone-card-dot" style="background:#ec4899">14</div>
+          <div class="phone-card-text">자료구조<small>14:00~16:00 · 정보관 201호</small></div>
+        </div>
+        <div class="phone-section-title">마감 임박 과제</div>
+        <div class="phone-card">
+          <div class="phone-card-dot warn">!</div>
+          <div class="phone-card-text">알고리즘 과제 #3<small>D-1 · 내일 23:59</small></div>
+        </div>
+        <div class="phone-section-title">이번 주 학사일정</div>
+        <div class="phone-card">
+          <div class="phone-card-dot success"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="phone-card-text">중간고사 시작<small>금 · 6/6</small></div>
+        </div>
+        <div class="phone-nav">
+          <span class="active">홈</span>
+          <span>시간표</span>
+          <span>학사</span>
+          <span>출결</span>
+          <span>학점</span>
+          <span>과제</span>
+        </div>
+      </div>
+
+      <div class="demo-points">
+        <h3>오프라인,<br>그래도 <em>완벽히</em>.</h3>
+        <ul>
+          <li><span class="num">01</span><div>로컬 DB 기반<small>네트워크 없이도 모든 기능 동작</small></div></li>
+          <li><span class="num">02</span><div>3단계 실시간 경고<small>안전(녹색) → 주의(75%) → 위험(한도 초과)</small></div></li>
+          <li><span class="num">03</span><div>한 손 조작<small>하단 네비게이션 + FAB 패턴</small></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 7: CLOSING ============ -->
+  <!-- 7초 -->
+  <section class="slide closing" data-time="7">
+    <div class="reveal closing-tag">THANK YOU</div>
+    <h1 class="reveal closing-title">감사합니다., <em></em></h1>
+    <p class="reveal closing-sub">흩어진 학사 정보를 하나로.</p>
+    <div class="reveal closing-info">
+      <div class="closing-info-item">
+        <strong>Repository</strong>
+        github.com/Denps04/Project_App
+      </div>
+      <div class="closing-info-item">
+        <strong>발표자료 URL</strong>
+        Denps04.github.io/Project_App
+      </div>
+      <div class="closing-info-item">
+        <strong>Demo</strong>
+        실기기로 바로 시연 가능
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ===== 2분 타이머 ===== -->
+<div class="timer-badge">
+  <div>
+    <div style="font-size:9px; letter-spacing:0.15em; margin-bottom:2px;">TIMER</div>
+    <div class="timer-display" id="timerDisplay">2:00</div>
+  </div>
+  <button class="timer-btn" id="timerBtn" onclick="toggleTimer()">START</button>
+  <button class="timer-btn" onclick="resetTimer()" style="opacity:0.6">RESET</button>
+</div>
+
+<div class="controls">
+  <span class="counter"><strong id="cur">1</strong> / <span id="total">7</span></span>
+  <button class="nav-btn" onclick="prev()">←</button>
+  <button class="nav-btn" onclick="next()">→</button>
+</div>
+
+<script>
+  // ===== Mermaid 초기화 =====
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark',
+    themeVariables: {
+      primaryColor: '#1e1e2e',
+      primaryTextColor: '#f5f5f7',
+      primaryBorderColor: '#818cf8',
+      lineColor: '#818cf8',
+      secondaryColor: '#12121a',
+      tertiaryColor: '#0a0a0f',
+      background: '#0a0a0f',
+      mainBkg: '#1e1e2e',
+      nodeBorder: '#818cf8',
+      clusterBkg: '#12121a',
+      titleColor: '#f5f5f7',
+      edgeLabelBackground: '#0a0a0f',
+      fontFamily: 'Pretendard, sans-serif',
+      fontSize: '14px',
+      mindmapPadding: 16,
+    },
+    mindmap: { padding: 16, maxWidth: 200 },
+    flowchart: { curve: 'basis', htmlLabels: true }
+  });
+
+  // ===== 슬라이드 네비게이션 =====
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+
+  document.getElementById('total').textContent = total;
+
+  function go(idx) {
+    if (idx < 0 || idx >= total) return;
+    slides[current].classList.remove('active');
+    current = idx;
+    slides[current].classList.add('active');
+    document.getElementById('cur').textContent = current + 1;
+    document.getElementById('progress').style.width = ((current + 1) / total * 100) + '%';
+  }
+
+  function next() { go(Math.min(current + 1, total - 1)); }
+  function prev() { go(Math.max(current - 1, 0)); }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+    if (e.key === 'Home') go(0);
+    if (e.key === 'End') go(total - 1);
+    if (e.key === 'f' || e.key === 'F') document.documentElement.requestFullscreen?.();
+    if (e.key === 't' || e.key === 'T') toggleTimer();
+    if (e.key === 'r' || e.key === 'R') resetTimer();
+  });
+
+  document.getElementById('deck').addEventListener('click', (e) => {
+    if (e.target.closest('button, a, .controls, .timer-badge')) return;
+    next();
+  });
+
+  document.getElementById('progress').style.width = (1 / total * 100) + '%';
+
+  // ===== 2분 타이머 =====
+  let timerInterval = null;
+  let timeLeft = 120;
+  let running = false;
+
+  function formatTime(s) {
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    return `${m}:${String(sec).padStart(2, '0')}`;
+  }
+
+  function updateTimerDisplay() {
+    const el = document.getElementById('timerDisplay');
+    el.textContent = formatTime(timeLeft);
+    el.className = 'timer-display';
+    if (timeLeft <= 30) el.classList.add('warn');
+    if (timeLeft <= 10) el.classList.add('danger');
+  }
+
+  function toggleTimer() {
+    if (running) {
+      clearInterval(timerInterval);
+      running = false;
+      document.getElementById('timerBtn').textContent = 'START';
+    } else {
+      running = true;
+      document.getElementById('timerBtn').textContent = 'STOP';
+      timerInterval = setInterval(() => {
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          running = false;
+          document.getElementById('timerBtn').textContent = 'START';
+          document.getElementById('timerDisplay').textContent = '0:00';
+          return;
+        }
+        timeLeft--;
+        updateTimerDisplay();
+      }, 1000);
+    }
+  }
+
+  function resetTimer() {
+    clearInterval(timerInterval);
+    running = false;
+    timeLeft = 120;
+    document.getElementById('timerBtn').textContent = 'START';
+    updateTimerDisplay();
+  }
+</script>
+
+</body>
+</html>
