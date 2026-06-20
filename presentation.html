@@ -260,24 +260,6 @@
   .nav-btn:hover { background: var(--accent); border-color: var(--accent); }
   .progress { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); z-index: 101; transition: width 0.3s ease; }
 
-  /* ===== TIMER ===== */
-  .timer-widget {
-    position: fixed; top: 16px; right: 28px; z-index: 100;
-    display: flex; align-items: center; gap: 10px;
-    font-family: 'JetBrains Mono', monospace;
-  }
-  .timer-display {
-    font-size: 20px; font-weight: 700;
-    color: var(--ink); letter-spacing: 0.05em;
-    background: var(--bg-2); border: 1px solid var(--line-strong);
-    padding: 6px 14px; border-radius: 6px;
-    transition: color 0.3s;
-  }
-  .timer-display.warn { color: var(--accent-warm); border-color: rgba(251,191,36,0.4); }
-  .timer-display.danger { color: var(--red); border-color: rgba(248,113,113,0.4); }
-  .timer-btn { width: 28px; height: 28px; border-radius: 4px; border: 1px solid var(--line-strong); background: var(--bg-2); color: var(--ink-dim); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
-  .timer-btn:hover { color: var(--ink); border-color: var(--accent); }
-
   /* ===== NOTES ===== */
   .notes-panel {
     position: fixed; bottom: 0; left: 0; right: 0;
@@ -306,13 +288,6 @@
 
 <div class="grain"></div>
 <div class="progress" id="progress"></div>
-
-<!-- TIMER -->
-<div class="timer-widget">
-  <button class="timer-btn" id="timerToggle" title="시작/일시정지">▶</button>
-  <button class="timer-btn" id="timerReset" title="리셋">↺</button>
-  <div class="timer-display" id="timerDisplay">5:00</div>
-</div>
 
 <!-- NOTES PANEL -->
 <div class="notes-panel" id="notesPanel">
@@ -1036,8 +1011,6 @@ graph TD
     if (e.key === 'End') go(total - 1);
     if (e.key === 'n' || e.key === 'N') toggleNotes();
     if (e.key === 'f' || e.key === 'F') document.documentElement.requestFullscreen?.();
-    if (e.key === 't' || e.key === 'T') toggleTimer();
-    if (e.key === 'r' || e.key === 'R') resetTimer();
   });
 
   document.getElementById('deck').addEventListener('click', (e) => {
@@ -1063,59 +1036,6 @@ graph TD
 
   updateNotes();
 
-  // ===== 타이머 (5:00 카운트다운) =====
-  let timerSeconds = 300;
-  let timerRunning = false;
-  let timerInterval = null;
-  const timerDisplay = document.getElementById('timerDisplay');
-  const timerToggleBtn = document.getElementById('timerToggle');
-
-  function formatTime(s) {
-    const m = Math.floor(s / 60);
-    const sec = s % 60;
-    return m + ':' + String(sec).padStart(2, '0');
-  }
-
-  function updateTimerDisplay() {
-    timerDisplay.textContent = formatTime(timerSeconds);
-    timerDisplay.className = 'timer-display';
-    if (timerSeconds <= 30) timerDisplay.classList.add('danger');
-    else if (timerSeconds <= 60) timerDisplay.classList.add('warn');
-  }
-
-  function toggleTimer() {
-    if (timerRunning) {
-      clearInterval(timerInterval);
-      timerRunning = false;
-      timerToggleBtn.textContent = '▶';
-    } else {
-      timerRunning = true;
-      timerToggleBtn.textContent = '⏸';
-      timerInterval = setInterval(() => {
-        if (timerSeconds > 0) {
-          timerSeconds--;
-          updateTimerDisplay();
-        } else {
-          clearInterval(timerInterval);
-          timerRunning = false;
-          timerToggleBtn.textContent = '▶';
-          timerDisplay.classList.add('danger');
-        }
-      }, 1000);
-    }
-  }
-
-  function resetTimer() {
-    clearInterval(timerInterval);
-    timerRunning = false;
-    timerToggleBtn.textContent = '▶';
-    timerSeconds = 300;
-    updateTimerDisplay();
-  }
-
-  document.getElementById('timerToggle').addEventListener('click', toggleTimer);
-  document.getElementById('timerReset').addEventListener('click', resetTimer);
-  updateTimerDisplay();
 </script>
 </body>
 </html>
