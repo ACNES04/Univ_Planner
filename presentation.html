@@ -18,585 +18,286 @@
     --accent: #818cf8;
     --accent-2: #c084fc;
     --accent-warm: #fbbf24;
+    --green: #34d399;
+    --red: #f87171;
     --line: rgba(255,255,255,0.08);
     --line-strong: rgba(255,255,255,0.15);
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   html, body {
-    width: 100%;
-    height: 100vh;
+    width: 100%; height: 100vh;
     overflow: hidden;
     background: var(--bg);
     color: var(--ink);
     font-family: 'Pretendard', sans-serif;
     -webkit-font-smoothing: antialiased;
   }
-
   body::before {
     content: '';
-    position: fixed;
-    inset: 0;
+    position: fixed; inset: 0;
     background:
       radial-gradient(circle at 20% 30%, rgba(129,140,248,0.08) 0%, transparent 50%),
       radial-gradient(circle at 80% 70%, rgba(192,132,252,0.06) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: 0;
+    pointer-events: none; z-index: 0;
   }
-
   .grain {
     position: fixed; inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
-    opacity: 0.025;
-    pointer-events: none;
-    z-index: 1;
+    opacity: 0.025; pointer-events: none; z-index: 1;
   }
-
   .deck {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    z-index: 2;
+    position: relative; width: 100%; height: 100vh; z-index: 2;
   }
-
-  /* visibility 방식으로 변경 — Mermaid가 숨긴 슬라이드도 렌더링하도록 */
   .slide {
-    position: absolute;
-    inset: 0;
-    padding: 64px 88px;
-    display: flex;
-    flex-direction: column;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.35s ease;
+    position: absolute; inset: 0;
+    padding: 52px 80px;
+    display: flex; flex-direction: column;
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity 0.3s ease;
   }
-
-  .slide.active {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: all;
-  }
-
+  .slide.active { opacity: 1; visibility: visible; pointer-events: all; }
   .slide.active .reveal {
-    animation: reveal 0.6s ease forwards;
-    opacity: 0;
-    transform: translateY(16px);
+    animation: reveal 0.55s ease forwards;
+    opacity: 0; transform: translateY(14px);
   }
+  .slide.active .reveal:nth-child(2) { animation-delay: 0.07s; }
+  .slide.active .reveal:nth-child(3) { animation-delay: 0.14s; }
+  .slide.active .reveal:nth-child(4) { animation-delay: 0.21s; }
+  .slide.active .reveal:nth-child(5) { animation-delay: 0.28s; }
+  .slide.active .reveal:nth-child(6) { animation-delay: 0.35s; }
+  @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
 
-  .slide.active .reveal:nth-child(2) { animation-delay: 0.08s; }
-  .slide.active .reveal:nth-child(3) { animation-delay: 0.16s; }
-  .slide.active .reveal:nth-child(4) { animation-delay: 0.24s; }
-  .slide.active .reveal:nth-child(5) { animation-delay: 0.32s; }
-
-  @keyframes reveal {
-    to { opacity: 1; transform: translateY(0); }
-  }
-
+  /* ===== TYPOGRAPHY ===== */
   .label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    color: var(--accent);
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    flex-shrink: 0;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.2em; color: var(--accent);
+    text-transform: uppercase; margin-bottom: 16px; flex-shrink: 0;
   }
-
-  /* ===== SLIDE 1: COVER ===== */
-  .cover {
-    justify-content: center;
-    padding: 64px 100px;
-  }
-
-  .cover-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    letter-spacing: 0.25em;
-    color: var(--accent);
-    margin-bottom: 28px;
-  }
-
-  .cover-title {
-    font-family: 'Noto Serif KR', 'Pretendard', serif;
-    font-weight: 900;
-    font-size: clamp(60px, 8.5vw, 130px);
-    line-height: 1.0;
-    letter-spacing: -0.04em;
-    margin-bottom: 24px;
-  }
-
-  .cover-title em {
-    font-style: normal;
-    font-weight: 300;
-    color: var(--accent);
-  }
-
-  .cover-sub {
-    font-size: 24px;
-    color: var(--ink-dim);
-    max-width: 700px;
-    line-height: 1.5;
-    margin-bottom: 60px;
-  }
-
-  .cover-meta {
-    display: flex;
-    gap: 40px;
-    align-items: center;
-    padding-top: 32px;
-    border-top: 1px solid var(--line);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    color: var(--ink-dim);
-  }
-
-  .cover-meta span strong { color: var(--ink); font-weight: 600; }
-
-  /* ===== SLIDE 2: VISION & PROBLEM ===== */
   .h2 {
-    font-family: 'Noto Serif KR', 'Pretendard', serif;
-    font-size: clamp(38px, 4.5vw, 60px);
-    font-weight: 700;
-    letter-spacing: -0.025em;
-    line-height: 1.2;
-    margin-bottom: 32px;
-    flex-shrink: 0;
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(36px, 4.5vw, 56px); font-weight: 700;
+    letter-spacing: -0.025em; line-height: 1.2;
+    margin-bottom: 24px; flex-shrink: 0;
   }
-
   .h2 em { font-style: normal; color: var(--accent); font-weight: 300; }
 
-  .vision-layout {
-    display: grid;
-    grid-template-columns: 1fr 1px 1fr;
-    gap: 0;
-    flex: 1;
-    min-height: 0;
-  }
+  /* ===== COVER ===== */
+  .cover { justify-content: center; padding: 64px 100px; }
+  .cover-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 14px; letter-spacing: 0.25em; color: var(--accent); margin-bottom: 24px; }
+  .cover-title { font-family: 'Noto Serif KR', serif; font-weight: 900; font-size: clamp(56px, 8vw, 120px); line-height: 1.0; letter-spacing: -0.04em; margin-bottom: 20px; }
+  .cover-title em { font-style: normal; font-weight: 300; color: var(--accent); }
+  .cover-sub { font-size: 25px; color: var(--ink-dim); max-width: 680px; line-height: 1.5; margin-bottom: 48px; }
+  .cover-meta { display: flex; gap: 36px; align-items: center; padding-top: 28px; border-top: 1px solid var(--line); font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--ink-dim); }
+  .cover-meta span strong { color: var(--ink); font-weight: 600; }
 
-  .vision-divider {
-    background: var(--line);
-    margin: 0 40px;
-  }
-
-  .vision-col { display: flex; flex-direction: column; gap: 16px; }
-
-  .vision-col-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-
-  .vision-col-label.problem { color: #f87171; }
-  .vision-col-label.solution { color: #34d399; }
-
-  .stat-row {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .stat-num {
-    font-family: 'Noto Serif KR', serif;
-    font-size: clamp(40px, 5vw, 64px);
-    font-weight: 900;
-    line-height: 1;
-    color: #f87171;
-    letter-spacing: -0.04em;
-    flex-shrink: 0;
-  }
-
-  .stat-desc {
-    font-size: 15px;
-    color: var(--ink-dim);
-    line-height: 1.4;
-  }
-
+  /* ===== VISION ===== */
+  .vision-layout { display: grid; grid-template-columns: 1fr 1px 1fr; flex: 1; min-height: 0; }
+  .vision-divider { background: var(--line); margin: 0 36px; }
+  .vision-col { display: flex; flex-direction: column; gap: 12px; }
+  .vision-col-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 4px; }
+  .vision-col-label.problem { color: var(--red); }
+  .vision-col-label.solution { color: var(--green); }
+  .stat-row { display: flex; align-items: baseline; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .stat-num { font-family: 'Noto Serif KR', serif; font-size: clamp(36px, 4.5vw, 58px); font-weight: 900; line-height: 1; color: var(--red); letter-spacing: -0.04em; flex-shrink: 0; }
+  .stat-desc { font-size: 16px; color: var(--ink-dim); line-height: 1.4; }
   .stat-desc strong { color: var(--ink); display: block; font-size: 17px; margin-bottom: 2px; }
+  .solution-card { padding: 14px 16px; background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.2); border-radius: 6px; display: flex; align-items: flex-start; gap: 12px; }
+  .solution-icon { width: 28px; height: 28px; border-radius: 7px; background: rgba(52,211,153,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--green); font-size: 14px; }
+  .solution-icon svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .solution-text { font-size: 16px; line-height: 1.45; color: var(--ink); }
+  .solution-text small { display: block; color: var(--ink-dim); font-size: 14px; margin-top: 3px; }
 
-  .solution-card {
-    padding: 18px 20px;
-    background: rgba(52,211,153,0.06);
-    border: 1px solid rgba(52,211,153,0.2);
-    border-radius: 6px;
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-  }
+  /* ===== WBS ===== */
+  .wbs-wrap { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .wbs-wrap .mermaid { width: 100%; max-height: 100%; }
+  .wbs-wrap svg { max-width: 100%; max-height: 100%; }
 
-  .solution-icon {
-    width: 32px; height: 32px;
-    border-radius: 8px;
-    background: rgba(52,211,153,0.15);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    color: #34d399;
-    font-size: 16px;
-  }
-
-  .solution-text { font-size: 16px; line-height: 1.5; color: var(--ink); }
-  .solution-text small { display: block; color: var(--ink-dim); font-size: 13px; margin-top: 4px; }
-
-  /* ===== SLIDE 3: WBS ===== */
-  .wbs-wrap {
-    flex: 1;
-    min-height: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  .wbs-wrap .mermaid {
-    width: 100%;
-    max-height: 100%;
-  }
-
-  .wbs-wrap svg {
-    max-width: 100%;
-    max-height: 100%;
-  }
-
-  /* ===== SLIDE 4: FEATURES ===== */
-  .feature-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    flex: 1;
-    min-height: 0;
-  }
-
-  .feature {
-    padding: 22px 20px;
-    background: var(--bg-2);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-  }
-
-  .feature::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 3px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-2));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s ease;
-  }
-
+  /* ===== FEATURES ===== */
+  .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; flex: 1; min-height: 0; }
+  .feature { padding: 18px 16px; background: var(--bg-2); border: 1px solid var(--line); border-radius: 8px; position: relative; overflow: hidden; transition: all 0.3s ease; }
+  .feature::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
   .feature:hover::before { transform: scaleX(1); }
   .feature:hover { border-color: var(--line-strong); transform: translateY(-2px); }
+  .feature-icon { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; margin-bottom: 10px; border-radius: 9px; background: rgba(129,140,248,0.08); border: 1px solid rgba(129,140,248,0.2); color: var(--accent); }
+  .feature-icon svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .feature-title { font-size: 17px; font-weight: 700; margin-bottom: 5px; }
+  .feature-desc { font-size: 14px; color: var(--ink-dim); line-height: 1.5; }
 
-  .feature-icon {
-    display: inline-flex;
-    align-items: center; justify-content: center;
-    width: 40px; height: 40px;
-    margin-bottom: 14px;
-    border-radius: 10px;
-    background: rgba(129,140,248,0.08);
-    border: 1px solid rgba(129,140,248,0.2);
-    color: var(--accent);
-  }
-
-  .feature-icon svg {
-    width: 20px; height: 20px;
-    stroke: currentColor; fill: none;
-    stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
-  }
-
-  .feature-title { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
-  .feature-desc { font-size: 13px; color: var(--ink-dim); line-height: 1.5; }
-
-  /* ===== SLIDE 5: TECH / ARCHITECTURE ===== */
-  .tech-layout {
-    display: grid;
-    grid-template-columns: 1fr 1.1fr;
-    gap: 48px;
-    align-items: start;
-    flex: 1;
-    min-height: 0;
-    overflow: hidden;
-  }
-
+  /* ===== TECH / ARCHITECTURE ===== */
+  .tech-layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: 40px; align-items: start; flex: 1; min-height: 0; overflow: hidden; }
   .stack-list { display: flex; flex-direction: column; gap: 0; }
-
-  .stack-row {
-    display: grid;
-    grid-template-columns: 90px 1fr;
-    gap: 16px;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--line);
-    align-items: baseline;
-  }
-
-  .stack-row .key {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--ink-dim);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-  }
-
+  .stack-row { display: grid; grid-template-columns: 80px 1fr; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .stack-row .key { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-dim); letter-spacing: 0.15em; text-transform: uppercase; }
   .stack-row .val { font-size: 19px; font-weight: 600; }
-  .stack-row .val small { display: block; font-size: 12px; color: var(--ink-dim); font-weight: 400; margin-top: 3px; }
+  .stack-row .val small { display: block; font-size: 13px; color: var(--ink-dim); font-weight: 400; margin-top: 2px; }
+  .arch-mermaid-wrap { background: var(--bg-2); border: 1px solid var(--line); border-radius: 8px; padding: 16px; display: flex; flex-direction: column; overflow: hidden; }
+  .arch-mermaid-title { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-dim); letter-spacing: 0.15em; margin-bottom: 10px; text-transform: uppercase; }
+  .arch-mermaid-wrap .mermaid { flex: 1; display: flex; align-items: center; justify-content: center; }
+  .arch-mermaid-wrap .mermaid svg { max-width: 100%; max-height: 460px; }
+  .arch-mermaid-wrap .mermaid svg text { font-size: 16px !important; }
+  .arch-mermaid-wrap .mermaid svg .label { font-size: 16px !important; }
 
-  .arch-mermaid-wrap {
-    background: var(--bg-2);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  .arch-mermaid-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--ink-dim);
-    letter-spacing: 0.15em;
-    margin-bottom: 12px;
-    text-transform: uppercase;
-  }
-
-  .arch-mermaid-wrap .mermaid {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .arch-mermaid-wrap .mermaid svg {
-    max-width: 100%;
-    max-height: 340px;
-  }
-
-  /* ===== SLIDE 6: DEMO ===== */
-  .demo-layout {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 48px;
-    align-items: center;
-    flex: 1;
-    min-height: 0;
-  }
-
-  .phone-mockup {
-    aspect-ratio: 9 / 19;
-    max-height: 480px;
-    margin: 0 auto;
-    background: var(--bg-2);
-    border: 8px solid #1a1a24;
-    border-radius: 36px;
-    padding: 20px 14px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 20px 60px rgba(129,140,248,0.15);
-    position: relative;
-  }
-
-  .phone-mockup::before {
-    content: '';
-    position: absolute;
-    top: 8px; left: 50%;
-    transform: translateX(-50%);
-    width: 70px; height: 5px;
-    background: #0a0a0f;
-    border-radius: 4px;
-  }
-
-  .phone-header { font-size: 16px; font-weight: 700; margin: 14px 0 12px 4px; }
-
-  .phone-section-title {
-    font-size: 9px; font-weight: 600; color: var(--accent);
-    margin: 10px 4px 5px; letter-spacing: 0.1em;
-  }
-
-  .phone-card {
-    background: rgba(129,140,248,0.08);
-    border-radius: 7px;
-    padding: 9px 10px;
-    margin-bottom: 5px;
-    display: flex; align-items: center; gap: 9px;
-  }
-
-  .phone-card-dot {
-    width: 20px; height: 20px;
-    border-radius: 50%;
-    background: var(--accent);
-    flex-shrink: 0;
-    font-size: 9px; color: white;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 600;
-  }
-
+  /* ===== DEMO ===== */
+  .demo-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; align-items: center; flex: 1; min-height: 0; }
+  .phone-mockup { aspect-ratio: 9/19; max-height: 440px; margin: 0 auto; background: var(--bg-2); border: 7px solid #1a1a24; border-radius: 32px; padding: 16px 12px; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(129,140,248,0.15); position: relative; }
+  .phone-mockup::before { content: ''; position: absolute; top: 7px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: #0a0a0f; border-radius: 3px; }
+  .phone-header { font-size: 14px; font-weight: 700; margin: 12px 0 10px 3px; }
+  .phone-section-title { font-size: 8px; font-weight: 600; color: var(--accent); margin: 8px 3px 4px; letter-spacing: 0.1em; }
+  .phone-card { background: rgba(129,140,248,0.08); border-radius: 6px; padding: 8px; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+  .phone-card-dot { width: 18px; height: 18px; border-radius: 50%; background: var(--accent); flex-shrink: 0; font-size: 8px; color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; }
   .phone-card-dot.warn { background: #f59e0b; }
   .phone-card-dot.success { background: #10b981; }
-
-  .phone-card-dot svg {
-    width: 11px; height: 11px;
-    stroke: white; fill: none;
-    stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
-  }
-
-  .phone-card-text { font-size: 10px; color: var(--ink); line-height: 1.3; }
-  .phone-card-text small { display: block; font-size: 8px; color: var(--ink-dim); margin-top: 2px; }
-
-  .phone-nav {
-    margin-top: auto;
-    display: flex; justify-content: space-around;
-    padding-top: 10px; border-top: 1px solid var(--line);
-    font-size: 8px; color: var(--ink-dim);
-  }
-
+  .phone-card-dot svg { width: 10px; height: 10px; stroke: white; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+  .phone-card-text { font-size: 9px; color: var(--ink); line-height: 1.3; }
+  .phone-card-text small { display: block; font-size: 7px; color: var(--ink-dim); margin-top: 1px; }
+  .phone-nav { margin-top: auto; display: flex; justify-content: space-around; padding-top: 8px; border-top: 1px solid var(--line); font-size: 7px; color: var(--ink-dim); }
   .phone-nav span.active { color: var(--accent); font-weight: 600; }
-
-  .demo-points h3 {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 36px; font-weight: 700;
-    margin-bottom: 20px; line-height: 1.25;
-    letter-spacing: -0.02em;
-  }
-
+  .demo-points h3 { font-family: 'Noto Serif KR', serif; font-size: 36px; font-weight: 700; margin-bottom: 18px; line-height: 1.25; letter-spacing: -0.02em; }
   .demo-points h3 em { color: var(--accent); font-style: normal; font-weight: 300; }
-
-  .demo-points ul { list-style: none; padding: 0; }
-
-  .demo-points li {
-    padding: 13px 0; border-top: 1px solid var(--line);
-    font-size: 16px; color: var(--ink);
-    display: flex; gap: 16px; align-items: baseline;
-  }
-
+  .demo-points ul { list-style: none; }
+  .demo-points li { padding: 11px 0; border-top: 1px solid var(--line); font-size: 17px; color: var(--ink); display: flex; gap: 14px; align-items: baseline; }
   .demo-points li:last-child { border-bottom: 1px solid var(--line); }
-  .demo-points li .num { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 11px; font-weight: 700; }
-  .demo-points li small { display: block; color: var(--ink-dim); font-size: 12px; margin-top: 4px; }
+  .demo-points li .num { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 12px; font-weight: 700; }
+  .demo-points li small { display: block; color: var(--ink-dim); font-size: 13px; margin-top: 3px; }
 
-  /* ===== SLIDE 7: CLOSING ===== */
-  .closing {
-    justify-content: center;
-    align-items: flex-start;
-    padding: 64px 100px;
-  }
-
-  .closing-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px; color: var(--accent);
-    letter-spacing: 0.25em; margin-bottom: 28px;
-  }
-
-  .closing-title {
-    font-family: 'Noto Serif KR', serif;
-    font-size: clamp(60px, 8vw, 110px);
-    font-weight: 900; line-height: 1.1;
-    letter-spacing: -0.04em; margin-bottom: 24px;
-  }
-
+  /* ===== CLOSING ===== */
+  .closing { justify-content: center; align-items: flex-start; padding: 64px 100px; }
+  .closing-tag { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--accent); letter-spacing: 0.25em; margin-bottom: 24px; }
+  .closing-title { font-family: 'Noto Serif KR', serif; font-size: clamp(52px, 7vw, 100px); font-weight: 900; line-height: 1.1; letter-spacing: -0.04em; margin-bottom: 20px; }
   .closing-title em { font-style: normal; color: var(--accent); font-weight: 300; }
+  .closing-sub { font-size: 23px; color: var(--ink-dim); margin-bottom: 48px; }
+  .closing-info { display: flex; gap: 48px; padding-top: 28px; border-top: 1px solid var(--line); }
+  .closing-info-item { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--ink-dim); }
+  .closing-info-item strong { display: block; color: var(--ink); font-size: 18px; margin-bottom: 3px; font-family: 'Pretendard', sans-serif; font-weight: 600; }
 
-  .closing-sub { font-size: 22px; color: var(--ink-dim); margin-bottom: 56px; }
+  /* ===== GENERIC TWO-COL ===== */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; flex: 1; min-height: 0; overflow: hidden; }
+  .two-col-wide { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; flex: 1; min-height: 0; overflow: hidden; }
+  .panel { background: var(--bg-2); border: 1px solid var(--line); border-radius: 8px; padding: 20px; display: flex; flex-direction: column; overflow: hidden; }
+  .panel-title { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-dim); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 14px; flex-shrink: 0; }
 
-  .closing-info {
-    display: flex; gap: 56px;
-    padding-top: 32px; border-top: 1px solid var(--line);
-  }
+  /* ===== ADR ===== */
+  .adr-list { display: flex; flex-direction: column; gap: 14px; flex: 1; min-height: 0; }
+  .adr-card { background: var(--bg-2); border: 1px solid var(--line); border-radius: 8px; padding: 16px 18px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+  .adr-header { display: flex; align-items: center; gap: 10px; }
+  .adr-num { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 700; background: rgba(129,140,248,0.12); padding: 3px 8px; border-radius: 4px; }
+  .adr-status { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--green); background: rgba(52,211,153,0.1); padding: 3px 8px; border-radius: 4px; }
+  .adr-title { font-size: 18px; font-weight: 700; }
+  .adr-context { font-size: 14px; color: var(--ink-dim); line-height: 1.5; }
+  .adr-decision { font-size: 15px; color: var(--green); margin-top: 2px; }
+  .adr-consequence { font-size: 13px; color: var(--ink-dim); padding-top: 6px; border-top: 1px solid var(--line); }
 
-  .closing-info-item {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px; color: var(--ink-dim);
-  }
+  /* ===== APP STRUCTURE ===== */
+  .dir-tree { font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.85; color: var(--ink-dim); white-space: pre; overflow-x: auto; }
+  .dir-tree .folder { color: var(--accent-warm); }
+  .dir-tree .file { color: var(--ink); }
+  .dir-tree .comment { color: rgba(129,140,248,0.6); font-size: 12px; }
+  .layer-badges { display: flex; flex-direction: column; gap: 10px; }
+  .layer-badge { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 6px; border: 1px solid; }
+  .layer-badge .lname { font-size: 16px; font-weight: 700; min-width: 90px; }
+  .layer-badge .ldesc { font-size: 14px; color: var(--ink-dim); line-height: 1.4; }
+  .layer-badge.pres { background: rgba(129,140,248,0.08); border-color: rgba(129,140,248,0.25); }
+  .layer-badge.pres .lname { color: var(--accent); }
+  .layer-badge.dom { background: rgba(251,191,36,0.06); border-color: rgba(251,191,36,0.2); }
+  .layer-badge.dom .lname { color: var(--accent-warm); }
+  .layer-badge.data { background: rgba(52,211,153,0.06); border-color: rgba(52,211,153,0.2); }
+  .layer-badge.data .lname { color: var(--green); }
+  .layer-badge.core { background: rgba(248,113,113,0.06); border-color: rgba(248,113,113,0.2); }
+  .layer-badge.core .lname { color: var(--red); }
 
-  .closing-info-item strong {
-    display: block; color: var(--ink);
-    font-size: 18px; margin-bottom: 4px;
-    font-family: 'Pretendard', sans-serif;
-    font-weight: 600; letter-spacing: -0.01em;
-  }
+  /* ===== DEV ENV & BUILD ===== */
+  .env-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; flex: 1; min-height: 0; }
+  .env-card { background: var(--bg-2); border: 1px solid var(--line); border-radius: 7px; padding: 14px 16px; }
+  .env-card-title { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 10px; }
+  .env-item { font-size: 15px; padding: 4px 0; border-bottom: 1px solid var(--line); color: var(--ink); display: flex; gap: 8px; align-items: baseline; }
+  .env-item:last-child { border-bottom: none; }
+  .env-item .ek { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-dim); min-width: 70px; }
+  .build-steps { display: flex; flex-direction: column; gap: 0; }
+  .build-step { display: flex; align-items: flex-start; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .build-step:last-child { border-bottom: none; }
+  .build-step-num { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--accent); font-weight: 700; flex-shrink: 0; min-width: 24px; }
+  .build-step-content .cmd { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--accent-warm); display: block; margin-bottom: 2px; }
+  .build-step-content .desc { font-size: 14px; color: var(--ink-dim); }
+
+  /* ===== TESTS ===== */
+  .test-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex: 1; min-height: 0; }
+  .test-result { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+  .test-pass { color: var(--green); font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; }
+  .test-name { color: var(--ink); }
+  .test-file { font-size: 12px; color: var(--ink-dim); font-family: 'JetBrains Mono', monospace; }
+
+  /* ===== PROGRESS / TIMELINE ===== */
+  .timeline { display: flex; flex-direction: column; gap: 0; flex: 1; min-height: 0; }
+  .tl-item { display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); align-items: flex-start; }
+  .tl-item:last-child { border-bottom: none; }
+  .tl-phase { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); min-width: 70px; padding-top: 2px; }
+  .tl-content .tl-title { font-size: 17px; font-weight: 600; margin-bottom: 2px; }
+  .tl-content .tl-desc { font-size: 14px; color: var(--ink-dim); line-height: 1.5; }
+  .tl-done { background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.25); color: var(--green); font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 2px 8px; border-radius: 4px; margin-left: auto; flex-shrink: 0; align-self: center; }
+
+  /* ===== QUALITY / PERF ===== */
+  .quality-list { display: flex; flex-direction: column; gap: 10px; flex: 1; min-height: 0; }
+  .q-item { background: var(--bg-2); border: 1px solid var(--line); border-radius: 6px; padding: 12px 16px; display: flex; gap: 12px; align-items: flex-start; }
+  .q-icon { width: 28px; height: 28px; border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--ink); }
+  .q-icon svg { width: 14px; height: 14px; }
+  .q-text .qt { font-size: 16px; font-weight: 600; margin-bottom: 2px; }
+  .q-text .qd { font-size: 14px; color: var(--ink-dim); line-height: 1.5; }
+  .q-text code { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--accent-warm); }
+
+  /* ===== UTILIZATION ===== */
+  .util-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; flex: 1; min-height: 0; }
+  .util-card { background: var(--bg-2); border: 1px solid var(--line); border-radius: 8px; padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+  .util-card-num { font-family: 'Noto Serif KR', serif; font-size: 54px; font-weight: 900; color: var(--accent); line-height: 1; letter-spacing: -0.04em; }
+  .util-card-title { font-size: 17px; font-weight: 700; }
+  .util-card-desc { font-size: 14px; color: var(--ink-dim); line-height: 1.5; }
 
   /* ===== CONTROLS ===== */
-  .controls {
-    position: fixed;
-    bottom: 24px; right: 32px;
-    display: flex; align-items: center; gap: 16px;
-    z-index: 100;
-    font-family: 'JetBrains Mono', monospace;
-  }
-
-  .counter { font-size: 12px; color: var(--ink-dim); letter-spacing: 0.1em; }
-  .counter strong { color: var(--ink); font-size: 14px; }
-
-  .nav-btn {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    border: 1px solid var(--line-strong);
-    background: var(--bg-2); color: var(--ink);
-    cursor: pointer; font-size: 16px;
-    transition: all 0.2s;
-    display: flex; align-items: center; justify-content: center;
-  }
-
+  .controls { position: fixed; bottom: 20px; right: 28px; display: flex; align-items: center; gap: 14px; z-index: 100; font-family: 'JetBrains Mono', monospace; }
+  .counter { font-size: 13px; color: var(--ink-dim); letter-spacing: 0.1em; }
+  .counter strong { color: var(--ink); font-size: 15px; }
+  .nav-btn { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--bg-2); color: var(--ink); cursor: pointer; font-size: 15px; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
   .nav-btn:hover { background: var(--accent); border-color: var(--accent); }
+  .progress { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); z-index: 101; transition: width 0.3s ease; }
 
-  .progress {
-    position: fixed; top: 0; left: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-2));
-    z-index: 101;
-    transition: width 0.3s ease;
-  }
-
-  /* 타이머 표시 */
-  .timer-badge {
-    position: fixed;
-    bottom: 28px; left: 32px;
+  /* ===== TIMER ===== */
+  .timer-widget {
+    position: fixed; top: 16px; right: 28px; z-index: 100;
+    display: flex; align-items: center; gap: 10px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; color: var(--ink-dim);
-    letter-spacing: 0.08em;
-    z-index: 100;
-    display: flex; align-items: center; gap: 12px;
   }
-
   .timer-display {
-    font-size: 22px; font-weight: 700;
+    font-size: 20px; font-weight: 700;
     color: var(--ink); letter-spacing: 0.05em;
+    background: var(--bg-2); border: 1px solid var(--line-strong);
+    padding: 6px 14px; border-radius: 6px;
+    transition: color 0.3s;
   }
+  .timer-display.warn { color: var(--accent-warm); border-color: rgba(251,191,36,0.4); }
+  .timer-display.danger { color: var(--red); border-color: rgba(248,113,113,0.4); }
+  .timer-btn { width: 28px; height: 28px; border-radius: 4px; border: 1px solid var(--line-strong); background: var(--bg-2); color: var(--ink-dim); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+  .timer-btn:hover { color: var(--ink); border-color: var(--accent); }
 
-  .timer-display.warn { color: var(--accent-warm); }
-  .timer-display.danger { color: #f87171; }
-
-  .timer-btn {
-    padding: 4px 10px;
-    border: 1px solid var(--line-strong);
-    border-radius: 4px;
-    background: var(--bg-2);
-    color: var(--ink-dim);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px; letter-spacing: 0.1em;
-    cursor: pointer;
-    transition: all 0.2s;
+  /* ===== NOTES ===== */
+  .notes-panel {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    height: 130px; background: rgba(10,10,15,0.95);
+    border-top: 1px solid var(--line-strong);
+    padding: 14px 80px; z-index: 200;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
   }
+  .notes-panel.open { transform: translateY(0); }
+  .notes-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 8px; text-transform: uppercase; }
+  .notes-text { font-size: 17px; line-height: 1.7; color: var(--ink); max-width: 900px; }
 
-  .timer-btn:hover { background: var(--accent); border-color: var(--accent); color: white; }
-
-  /* ===== Mermaid 전역 오버라이드 ===== */
-  .mermaid svg {
-    background: transparent !important;
-    font-family: 'Pretendard', sans-serif !important;
-  }
+  /* ===== Mermaid 전역 ===== */
+  .mermaid svg { background: transparent !important; font-family: 'Pretendard', sans-serif !important; }
 
   @media (max-width: 1024px) {
-    .slide { padding: 40px 48px; }
-    .feature-grid { grid-template-columns: repeat(2, 1fr); }
-    .tech-layout, .demo-layout, .vision-layout { grid-template-columns: 1fr; gap: 24px; }
+    .slide { padding: 36px 44px; }
+    .feature-grid, .two-col, .two-col-wide, .env-grid, .test-grid, .util-grid { grid-template-columns: 1fr; }
+    .tech-layout, .demo-layout, .vision-layout { grid-template-columns: 1fr; gap: 20px; }
     .vision-divider { display: none; }
   }
 </style>
@@ -606,116 +307,105 @@
 <div class="grain"></div>
 <div class="progress" id="progress"></div>
 
+<!-- TIMER -->
+<div class="timer-widget">
+  <button class="timer-btn" id="timerToggle" title="시작/일시정지">▶</button>
+  <button class="timer-btn" id="timerReset" title="리셋">↺</button>
+  <div class="timer-display" id="timerDisplay">5:00</div>
+</div>
+
+<!-- NOTES PANEL -->
+<div class="notes-panel" id="notesPanel">
+  <div class="notes-label">대사 (N 키로 토글)</div>
+  <div class="notes-text" id="notesText"></div>
+</div>
+
 <div class="deck" id="deck">
 
-  <!-- ============ SLIDE 1: COVER ============ -->
-  <!-- 8초 -->
-  <section class="slide cover active" data-time="8">
-    <div class="reveal cover-eyebrow">FINAL PRESENTATION · 2026</div>
-    <h1 class="reveal cover-title">Univ<br><em>Planner.</em></h1>
-    <p class="reveal cover-sub">
-      흩어진 학사 정보를 손바닥 위에서 하나로.<br>
-      대학생을 위한 올인원 학사 관리 앱.
-    </p>
-    <div class="reveal cover-meta">
-      <span><strong>플랫폼</strong> &nbsp;Flutter · iOS · Android</span>
-      <span><strong>발표자</strong> &nbsp;이준오</span>
-      <span><strong>기간</strong> &nbsp;1주</span>
-    </div>
-  </section>
+<!-- ============================
+     SLIDE 01 · COVER
+     목표: 5초
+============================ -->
+<section class="slide cover active"
+  data-time="5"
+  data-notes="[5초] 인사 → 앱 이름 소개">
+  <div class="reveal cover-eyebrow">FINAL PRESENTATION · 2026 · 앱프로그래밍</div>
+  <h1 class="reveal cover-title">Univ<br><em>Planner.</em></h1>
+  <p class="reveal cover-sub">흩어진 학사 정보를 손바닥 위에서 하나로.<br>대학생을 위한 올인원 학사 관리 앱.</p>
+  <div class="reveal cover-meta">
+    <span><strong>플랫폼</strong> &nbsp;Flutter · iOS · Android</span>
+    <span><strong>발표자</strong> &nbsp;이준오</span>
+    <span><strong>기간</strong> &nbsp;1주 기획–개발–배포</span>
+  </div>
+</section>
 
-  <!-- ============ SLIDE 2: VISION & PROBLEM ============ -->
-  <!-- 25초 | 말: "대학생은 매 학기 시간표·과제·출결·학점을 각각 다른 앱에서 관리합니다. Univ Planner는 이 모든 것을 하나의 앱으로 통합합니다." -->
-  <section class="slide" data-time="25">
-    <div class="reveal label">01 · VISION & PROBLEM</div>
-    <h2 class="reveal h2">대학생은 <em>5개 앱</em>을 띄워두고 있다.</h2>
-
-    <div class="reveal vision-layout">
-      <!-- LEFT: PROBLEM -->
-      <div class="vision-col">
-        <div class="vision-col-label problem">● 문제 (Before)</div>
-
-        <div class="stat-row">
-          <div class="stat-num">5</div>
-          <div class="stat-desc">
-            <strong>앱을 동시에 사용</strong>
-            에브리타임 · 노션 · 학교사이트 · 계산기 · 메모앱
-          </div>
-        </div>
-
-        <div class="stat-row">
-          <div class="stat-num">25%</div>
-          <div class="stat-desc">
-            <strong>결석 한도</strong>
-            초과 여부를 계산기로 직접 두드려야 함
-          </div>
-        </div>
-
-        <div class="stat-row" style="border-bottom:none">
-          <div class="stat-num">D-?</div>
-          <div class="stat-desc">
-            <strong>과제 마감 파악 불가</strong>
-            산발된 채널로 마감일을 자꾸 놓침
-          </div>
-        </div>
+<!-- ============================
+     SLIDE 02 · VISION & PROBLEM
+     목표: 25초
+============================ -->
+<section class="slide"
+  data-time="20"
+  data-notes="[20초] 5개 앱 → 분산 경험 → 결석 초과·마감 실패 → 비전: 하나의 앱, 오프라인 완전 동작">
+  <div class="reveal label">01 · VISION &amp; PROBLEM</div>
+  <h2 class="reveal h2">대학생은 <em>5개 앱</em>을 띄워두고 있다.</h2>
+  <div class="reveal vision-layout">
+    <div class="vision-col">
+      <div class="vision-col-label problem">● 문제 (Before)</div>
+      <div class="stat-row">
+        <div class="stat-num">5</div>
+        <div class="stat-desc"><strong>앱을 동시에 사용</strong>에브리타임·노션·학교사이트·계산기·메모앱</div>
       </div>
-
-      <div class="vision-divider"></div>
-
-      <!-- RIGHT: SOLUTION / VISION -->
-      <div class="vision-col">
-        <div class="vision-col-label solution">● 비전 (After)</div>
-
-        <div class="solution-card">
-          <div class="solution-icon">📅</div>
-          <div class="solution-text">
-            <strong>시간표 + 학사일정</strong>
-            <small>주간 시간표와 캘린더를 한 앱에서</small>
-          </div>
-        </div>
-
-        <div class="solution-card">
-          <div class="solution-icon">⚠️</div>
-          <div class="solution-text">
-            <strong>출결 자동 경고</strong>
-            <small>안전 · 주의 · 위험 3단계, 25% 한도 실시간 계산</small>
-          </div>
-        </div>
-
-        <div class="solution-card">
-          <div class="solution-icon">🎯</div>
-          <div class="solution-text">
-            <strong>학점 + 과제 한곳에</strong>
-            <small>GPA 자동 계산 · D-Day 마감 알림</small>
-          </div>
-        </div>
-
-        <div class="solution-card" style="margin-top:4px; border-color: rgba(129,140,248,0.3); background: rgba(129,140,248,0.06);">
-          <div class="solution-icon" style="background: rgba(129,140,248,0.15); color: var(--accent);">✦</div>
-          <div class="solution-text">
-            <strong style="color: var(--accent);">오프라인 완전 동작</strong>
-            <small>네트워크 없이도 모든 기능 — Hive 로컬 DB</small>
-          </div>
-        </div>
+      <div class="stat-row">
+        <div class="stat-num">25%</div>
+        <div class="stat-desc"><strong>결석 한도 초과 위험</strong>계산기로 직접 두드려야 파악 가능</div>
+      </div>
+      <div class="stat-row" style="border-bottom:none">
+        <div class="stat-num">D-?</div>
+        <div class="stat-desc"><strong>과제 마감 파악 불가</strong>산발된 채널로 마감일을 자꾸 놓침</div>
       </div>
     </div>
-  </section>
+    <div class="vision-divider"></div>
+    <div class="vision-col">
+      <div class="vision-col-label solution">● 비전 (After)</div>
+      <div class="solution-card">
+        <div class="solution-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
+        <div class="solution-text"><strong>시간표 + 학사일정 통합</strong><small>주간 시간표와 캘린더를 한 앱에서</small></div>
+      </div>
+      <div class="solution-card">
+        <div class="solution-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div class="solution-text"><strong>출결 자동 경고</strong><small>안전·주의·위험 3단계, 25% 한도 실시간 계산</small></div>
+      </div>
+      <div class="solution-card">
+        <div class="solution-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+        <div class="solution-text"><strong>학점 + 과제 한곳에</strong><small>GPA 자동 계산 · D-Day 마감 알림</small></div>
+      </div>
+      <div class="solution-card" style="border-color:rgba(129,140,248,0.3);background:rgba(129,140,248,0.06);">
+        <div class="solution-icon" style="background:rgba(129,140,248,0.15);color:var(--accent);"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+        <div class="solution-text"><strong style="color:var(--accent);">오프라인 완전 동작</strong><small>네트워크 없이도 모든 기능 — Hive 로컬 DB</small></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- ============ SLIDE 3: WBS ============ -->
-  <!-- 20초 | 말: "프로젝트 전체 작업을 WBS로 정리했습니다. 기획-설계-개발-테스트-배포 5단계로 진행했으며, 개발 단계에서 6개 기능을 병렬로 구현했습니다." -->
-  <section class="slide" data-time="20">
-    <div class="reveal label">02 · WBS — Work Breakdown Structure</div>
-    <div class="reveal wbs-wrap">
-      <div class="mermaid">
+<!-- ============================
+     SLIDE 03 · WBS + TECH STACK
+     목표: 20초
+============================ -->
+<section class="slide"
+  data-time="15"
+  data-notes="[15초] WBS 5단계 → 6개 기능 병렬 → 1주 완료">
+  <div class="reveal label">02 · WBS — Work Breakdown Structure</div>
+  <div class="reveal wbs-wrap">
+    <div class="mermaid">
 mindmap
   root((Univ<br>Planner))
     기획
       요구사항 분석
-      기능 선정<br>6종
-      ADR 문서화
+      기능 선정 6종
+      ADR 문서화 3건
     설계
-      아키텍처<br>Layered+MVVM
-      데이터 모델<br>Hive Schema
+      아키텍처 Layered+MVVM
+      Hive 스키마 설계
       UI 와이어프레임
     개발
       홈 화면
@@ -725,95 +415,43 @@ mindmap
       학점 계산기
       과제 메모
     테스트
-      단위 테스트<br>3종
+      단위 테스트 3종
       경계값 검증
+      통합 테스트
     배포
-      GitHub Pages<br>발표자료
-      실기기<br>시연
-      </div>
+      GitHub Pages 발표자료
+      실기기 시연
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ============ SLIDE 4: FEATURES ============ -->
-  <!-- 20초 | 말: "6개 기능을 하나의 앱에 담았습니다. 각 화면은 하단 네비게이션으로 즉시 접근 가능합니다." -->
-  <section class="slide" data-time="20">
-    <div class="reveal label">03 · WHAT IT DOES</div>
-    <h2 class="reveal h2">한 앱, <em>여섯 가지</em> 약속.</h2>
-
-    <div class="reveal feature-grid">
-      <div class="feature">
-        <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a2 2 0 0 1-2 2h-3v-7h-8v7H5a2 2 0 0 1-2-2V9.5z"/></svg></span>
-        <div class="feature-title">홈</div>
-        <div class="feature-desc">오늘 수업 · 마감 임박 과제 · 이번 주 일정을 한눈에</div>
-      </div>
-      <div class="feature">
-        <span class="feature-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 14h2M14 14h2M8 18h2M14 18h2"/></svg></span>
-        <div class="feature-title">시간표</div>
-        <div class="feature-desc">주간 시간표 등록과 색상 커스터마이즈</div>
-      </div>
-      <div class="feature">
-        <span class="feature-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg></span>
-        <div class="feature-title">학사일정</div>
-        <div class="feature-desc">시험·휴일·학사 일정 캘린더 등록</div>
-      </div>
-      <div class="feature">
-        <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
-        <div class="feature-title">출결 계산기</div>
-        <div class="feature-desc">안전→주의→위험 3단계 · 지각 3회=결석 1회 · 25% 한도</div>
-      </div>
-      <div class="feature">
-        <span class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
-        <div class="feature-title">학점 계산기</div>
-        <div class="feature-desc">A+~F 9단계 · 4.5 만점 GPA 자동 계산</div>
-      </div>
-      <div class="feature">
-        <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M9 2h6a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M8 12h8M8 16h6M8 8h.01"/></svg></span>
-        <div class="feature-title">과제 메모</div>
-        <div class="feature-desc">마감일 · 우선순위 · D-Day 표시</div>
-      </div>
+<!-- ============================
+     SLIDE 04 · ARCHITECTURE
+     목표: 20초
+============================ -->
+<section class="slide"
+  data-time="20"
+  data-notes="[20초] Flutter/Riverpod/Hive → 4계층 단방향 → Widget→Provider→UseCase→Repository→Hive → Domain 외부 의존 0">
+  <div class="reveal label">03 · ARCHITECTURE — 4계층 단방향 의존성</div>
+  <h2 class="reveal h2">Layered + <em>MVVM</em></h2>
+  <div class="reveal tech-layout">
+    <div class="stack-list">
+      <div class="stack-row"><span class="key">PLATFORM</span><span class="val">Flutter 3.x<small>iOS · Android 단일 코드베이스</small></span></div>
+      <div class="stack-row"><span class="key">STATE</span><span class="val">Riverpod 2.x<small>코드생성 기반 선언형 상태관리</small></span></div>
+      <div class="stack-row"><span class="key">STORAGE</span><span class="val">Hive 2.x<small>NoSQL 로컬 DB · 오프라인 우선</small></span></div>
+      <div class="stack-row"><span class="key">PATTERN</span><span class="val">Layered + MVVM<small>4계층 단방향 의존성</small></span></div>
+      <div class="stack-row"><span class="key">UI</span><span class="val">Material 3<small>시스템 다크모드 자동 연동</small></span></div>
+      <div class="stack-row"><span class="key">AI AGENT</span><span class="val">Claude Code<small>설계·코드리뷰·AGENTS.md 생성 자동화</small></span></div>
     </div>
-  </section>
-
-  <!-- ============ SLIDE 5: TECH + MERMAID ARCHITECTURE ============ -->
-  <!-- 25초 | 말: "Flutter + Riverpod + Hive로 구성했습니다. 아키텍처는 Layered + MVVM 4계층으로, Presentation에서 Domain으로 단방향 의존성을 유지합니다." -->
-  <section class="slide" data-time="25">
-    <div class="reveal label">04 · ARCHITECTURE</div>
-    <h2 class="reveal h2">4계층 <em>단방향</em> 의존성.</h2>
-
-    <div class="reveal tech-layout">
-      <div class="stack-list">
-        <div class="stack-row">
-          <span class="key">PLATFORM</span>
-          <span class="val">Flutter <small>iOS · Android 단일 코드베이스</small></span>
-        </div>
-        <div class="stack-row">
-          <span class="key">STATE</span>
-          <span class="val">Riverpod <small>선언형 상태 관리</small></span>
-        </div>
-        <div class="stack-row">
-          <span class="key">STORAGE</span>
-          <span class="val">Hive <small>오프라인 로컬 DB</small></span>
-        </div>
-        <div class="stack-row">
-          <span class="key">PATTERN</span>
-          <span class="val">Layered + MVVM <small>4계층 단방향 의존성</small></span>
-        </div>
-        <div class="stack-row">
-          <span class="key">UI</span>
-          <span class="val">Material 3 <small>시스템 다크모드 자동 연동</small></span>
-        </div>
-      </div>
-
-      <div class="arch-mermaid-wrap">
-        <div class="arch-mermaid-title">DATA FLOW — MERMAID</div>
-        <div class="mermaid">
+    <div class="arch-mermaid-wrap">
+      <div class="arch-mermaid-title">DATA FLOW — MERMAID</div>
+      <div class="mermaid">
 graph TD
-    W["🖼️ Widget\n(Presentation)"]
-    VM["⚙️ ViewModel\n(Riverpod Provider)"]
-    UC["🧠 UseCase\n(Domain)"]
-    REPO["📦 Repository\n(Interface)"]
-    H[("💾 Hive\nLocal DB")]
-
+    W["Widget\n(Presentation)"]
+    VM["ViewModel\n(Riverpod Provider)"]
+    UC["UseCase\n(Domain)"]
+    REPO["Repository\n(Interface)"]
+    H[("Hive\nLocal DB")]
     W -- "user action" --> VM
     VM -- "execute" --> UC
     UC -- "call" --> REPO
@@ -822,131 +460,560 @@ graph TD
     REPO -- "entity" --> UC
     UC -- "result" --> VM
     VM -- "state update" --> W
-        </div>
       </div>
     </div>
-  </section>
-
-  <!-- ============ SLIDE 6: DEMO ============ -->
-  <!-- 15초 | 말: "홈 화면 하나에서 오늘 수업, 임박 과제, 학사일정을 모두 확인할 수 있습니다. 완전 오프라인 동작입니다." -->
-  <section class="slide" data-time="15">
-    <div class="reveal label">05 · DEMO</div>
-    <h2 class="reveal h2">홈 한 화면이 <em>모든 것</em>을 모은다.</h2>
-
-    <div class="reveal demo-layout">
-      <div class="phone-mockup">
-        <div class="phone-header">홈</div>
-        <div class="phone-section-title">오늘의 수업</div>
-        <div class="phone-card">
-          <div class="phone-card-dot">10</div>
-          <div class="phone-card-text">운영체제<small>10:00~12:00 · 공대 401호</small></div>
-        </div>
-        <div class="phone-card">
-          <div class="phone-card-dot" style="background:#ec4899">14</div>
-          <div class="phone-card-text">자료구조<small>14:00~16:00 · 정보관 201호</small></div>
-        </div>
-        <div class="phone-section-title">마감 임박 과제</div>
-        <div class="phone-card">
-          <div class="phone-card-dot warn">!</div>
-          <div class="phone-card-text">알고리즘 과제 #3<small>D-1 · 내일 23:59</small></div>
-        </div>
-        <div class="phone-section-title">이번 주 학사일정</div>
-        <div class="phone-card">
-          <div class="phone-card-dot success"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <div class="phone-card-text">중간고사 시작<small>금 · 6/6</small></div>
-        </div>
-        <div class="phone-nav">
-          <span class="active">홈</span>
-          <span>시간표</span>
-          <span>학사</span>
-          <span>출결</span>
-          <span>학점</span>
-          <span>과제</span>
-        </div>
-      </div>
-
-      <div class="demo-points">
-        <h3>오프라인,<br>그래도 <em>완벽히</em>.</h3>
-        <ul>
-          <li><span class="num">01</span><div>로컬 DB 기반<small>네트워크 없이도 모든 기능 동작</small></div></li>
-          <li><span class="num">02</span><div>3단계 실시간 경고<small>안전(녹색) → 주의(75%) → 위험(한도 초과)</small></div></li>
-          <li><span class="num">03</span><div>한 손 조작<small>하단 네비게이션 + FAB 패턴</small></div></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ SLIDE 7: CLOSING ============ -->
-  <!-- 7초 -->
-  <section class="slide closing" data-time="7">
-    <div class="reveal closing-tag">THANK YOU</div>
-    <h1 class="reveal closing-title">질문, <em>환영합니다.</em></h1>
-    <p class="reveal closing-sub">흩어진 학사 정보를 하나로.</p>
-    <div class="reveal closing-info">
-      <div class="closing-info-item">
-        <strong>Repository</strong>
-        github.com/Denps04/Project_App
-      </div>
-      <div class="closing-info-item">
-        <strong>발표자료 URL</strong>
-        Denps04.github.io/Project_App
-      </div>
-      <div class="closing-info-item">
-        <strong>Demo</strong>
-        실기기로 바로 시연 가능
-      </div>
-    </div>
-  </section>
-
-</div>
-
-<!-- ===== 2분 타이머 ===== -->
-<div class="timer-badge">
-  <div>
-    <div style="font-size:9px; letter-spacing:0.15em; margin-bottom:2px;">TIMER</div>
-    <div class="timer-display" id="timerDisplay">2:00</div>
   </div>
-  <button class="timer-btn" id="timerBtn" onclick="toggleTimer()">START</button>
-  <button class="timer-btn" onclick="resetTimer()" style="opacity:0.6">RESET</button>
-</div>
+</section>
 
+<!-- ============================
+     SLIDE 05 · FEATURES
+     목표: 15초
+============================ -->
+<section class="slide"
+  data-time="10"
+  data-notes="[10초] 6개 기능 열거 → 하단 네비게이션">
+  <div class="reveal label">04 · FEATURES — 한 앱, 여섯 가지 약속</div>
+  <h2 class="reveal h2">6가지 <em>핵심 기능</em></h2>
+  <div class="reveal feature-grid">
+    <div class="feature">
+      <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a2 2 0 0 1-2 2h-3v-7h-8v7H5a2 2 0 0 1-2-2V9.5z"/></svg></span>
+      <div class="feature-title">홈 대시보드</div>
+      <div class="feature-desc">오늘 수업·임박 과제·이번 주 일정을 한눈에</div>
+    </div>
+    <div class="feature">
+      <span class="feature-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 14h2M14 14h2M8 18h2M14 18h2"/></svg></span>
+      <div class="feature-title">시간표</div>
+      <div class="feature-desc">주간 시간표 등록과 색상 커스터마이즈</div>
+    </div>
+    <div class="feature">
+      <span class="feature-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg></span>
+      <div class="feature-title">학사일정</div>
+      <div class="feature-desc">시험·휴일·학사 일정 캘린더 등록</div>
+    </div>
+    <div class="feature">
+      <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+      <div class="feature-title">출결 계산기</div>
+      <div class="feature-desc">안전→주의→위험 3단계 · 지각 3회=결석 1회 · 25% 한도</div>
+    </div>
+    <div class="feature">
+      <span class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+      <div class="feature-title">학점 계산기</div>
+      <div class="feature-desc">A+~F 9단계 · 4.5 만점 GPA 자동 계산</div>
+    </div>
+    <div class="feature">
+      <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M9 2h6a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M8 12h8M8 16h6"/></svg></span>
+      <div class="feature-title">과제 메모</div>
+      <div class="feature-desc">마감일·우선순위·D-Day 표시</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SLIDE 06 · PROJECT PROGRESS
+     목표: 20초
+============================ -->
+<section class="slide"
+  data-time="15"
+  data-notes="[15초] 1주 스프린트 → 1일기획·2일설계·3~5일개발·6일테스트·7일배포 → 전 단계 DONE">
+  <div class="reveal label">05 · 프로젝트 진행 과정</div>
+  <h2 class="reveal h2">1주 <em>스프린트</em></h2>
+  <div class="reveal timeline">
+    <div class="tl-item">
+      <span class="tl-phase">DAY 1</span>
+      <div class="tl-content"><div class="tl-title">기획 &amp; ADR 문서화</div><div class="tl-desc">요구사항 분석 · ADR-001~003 작성 · 기능 6종 확정</div></div>
+      <span class="tl-done">DONE</span>
+    </div>
+    <div class="tl-item">
+      <span class="tl-phase">DAY 2</span>
+      <div class="tl-content"><div class="tl-title">아키텍처 설계</div><div class="tl-desc">Layered+MVVM 4계층 확정 · Hive 스키마 설계 · UI 와이어프레임</div></div>
+      <span class="tl-done">DONE</span>
+    </div>
+    <div class="tl-item">
+      <span class="tl-phase">DAY 3–4</span>
+      <div class="tl-content"><div class="tl-title">핵심 기능 개발</div><div class="tl-desc">출결 계산기·학점 계산기·홈 대시보드 구현 (Hive 연동)</div></div>
+      <span class="tl-done">DONE</span>
+    </div>
+    <div class="tl-item">
+      <span class="tl-phase">DAY 5</span>
+      <div class="tl-content"><div class="tl-title">UI 완성 &amp; 나머지 화면</div><div class="tl-desc">시간표·학사일정·과제메모 · Material 3 적용 · 다크모드 연동</div></div>
+      <span class="tl-done">DONE</span>
+    </div>
+    <div class="tl-item">
+      <span class="tl-phase">DAY 6</span>
+      <div class="tl-content"><div class="tl-title">테스트</div><div class="tl-desc">단위 테스트 3종 · 경계값 검증 · 통합 테스트 (앱 기동)</div></div>
+      <span class="tl-done">DONE</span>
+    </div>
+    <div class="tl-item">
+      <span class="tl-phase">DAY 7</span>
+      <div class="tl-content"><div class="tl-title">배포 &amp; 문서화</div><div class="tl-desc">GitHub Pages 발표자료 · README · AGENTS.md · 설치 가이드</div></div>
+      <span class="tl-done">DONE</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SLIDE 07 · IMPLEMENTATION
+     목표: 20초
+============================ -->
+<section class="slide"
+  data-time="20"
+  data-notes="[20초] ① TypeAdapter 코드생성 ② AsyncNotifierProvider ③ 출결 순수함수(지각3=결석1, 25% 초과→위험)">
+  <div class="reveal label">06 · 구현 방법</div>
+  <h2 class="reveal h2">어떻게 <em>만들었는가</em></h2>
+  <div class="reveal two-col">
+    <div class="panel">
+      <div class="panel-title">Hive + 코드 생성</div>
+      <div class="build-steps">
+        <div class="build-step"><span class="build-step-num">①</span><div class="build-step-content"><span class="cmd">@HiveType / @HiveField 애노테이션</span><span class="desc">엔티티 클래스에 어노테이션 추가</span></div></div>
+        <div class="build-step"><span class="build-step-num">②</span><div class="build-step-content"><span class="cmd">flutter pub run build_runner build</span><span class="desc">TypeAdapter 자동 생성 → 직렬화 자동화</span></div></div>
+        <div class="build-step"><span class="build-step-num">③</span><div class="build-step-content"><span class="cmd">Hive.openLazyBox&lt;T&gt;()</span><span class="desc">대용량 리스트는 LazyBox로 메모리 절약</span></div></div>
+        <div class="build-step"><span class="build-step-num">④</span><div class="build-step-content"><span class="cmd">Repository 구현체가 Box를 래핑</span><span class="desc">Domain 계층은 Hive에 직접 의존하지 않음</span></div></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">출결 로직 — 순수 함수 설계</div>
+      <div class="build-steps">
+        <div class="build-step"><span class="build-step-num">①</span><div class="build-step-content"><span class="cmd">effectiveAbsences = absences + (lates ÷ 3)</span><span class="desc">지각 3회 = 결석 1회 환산</span></div></div>
+        <div class="build-step"><span class="build-step-num">②</span><div class="build-step-content"><span class="cmd">threshold = totalClasses × 0.25</span><span class="desc">25% 한도 동적 계산</span></div></div>
+        <div class="build-step"><span class="build-step-num">③</span><div class="build-step-content"><span class="cmd">safe / caution / danger 3단계</span><span class="desc">&lt;50% · 50~99% · ≥100% 한도 사용</span></div></div>
+        <div class="build-step"><span class="build-step-num">④</span><div class="build-step-content"><span class="cmd">AttendanceStatus enum 반환</span><span class="desc">UI는 enum만 보고 색상 결정 — 테스트 용이</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SLIDE 08 · TRIAL & ERROR + PERFORMANCE
+     목표: 20초
+============================ -->
+<section class="slide"
+  data-time="20"
+  data-notes="[20초] 시행착오: Provider→Riverpod(ADR-002), Box→LazyBox / 성능: const·RepaintBoundary·ListView.builder / 실패=자산">
+  <div class="reveal label">07 · 구현 시행착오 &amp; 성능 최적화</div>
+  <h2 class="reveal h2">실패에서 <em>배운 것</em></h2>
+  <div class="reveal two-col">
+    <div class="panel">
+      <div class="panel-title">시행착오 사례</div>
+      <div class="quality-list">
+        <div class="q-item">
+          <div class="q-icon" style="background:rgba(248,113,113,0.1);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></div>
+          <div class="q-text">
+            <div class="qt">Provider → Riverpod 마이그레이션</div>
+            <div class="qd">컴파일 타임 타입 안전성 부재, Provider 중첩 시 가독성 저하 → ADR-002로 결정 기록</div>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-icon" style="background:rgba(248,113,113,0.1);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.29 7 12 12 20.71 7"/><line x1="12" y1="22" x2="12" y2="12"/></svg></div>
+          <div class="q-text">
+            <div class="qt">Hive Box → LazyBox 전환</div>
+            <div class="qd">일반 Box는 전체 데이터를 메모리에 로드 → 수백 개 과제 시 메모리 급증 → LazyBox로 해결</div>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-icon" style="background:rgba(248,113,113,0.1);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg></div>
+          <div class="q-text">
+            <div class="qt">UI 깜빡임 (setState 남용)</div>
+            <div class="qd">전체 화면 rebuild → ConsumerWidget으로 구독 범위를 최소화해 해결</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">성능 최적화 노력</div>
+      <div class="quality-list">
+        <div class="q-item">
+          <div class="q-icon" style="background:rgba(52,211,153,0.1);"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <div class="q-text">
+            <div class="qt"><code>const</code> 위젯 적극 활용</div>
+            <div class="qd">변경 없는 하위 트리를 const로 선언해 불필요한 리빌드 차단</div>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-icon" style="background:rgba(52,211,153,0.1);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><rect x="8" y="8" width="8" height="8" rx="1"/></svg></div>
+          <div class="q-text">
+            <div class="qt">RepaintBoundary 적용</div>
+            <div class="qd">애니메이션 위젯 경계에 RepaintBoundary → 불필요한 repaint 분리</div>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-icon" style="background:rgba(52,211,153,0.1);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="4" cy="6" r="1" fill="currentColor" stroke="none"/><circle cx="4" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="4" cy="18" r="1" fill="currentColor" stroke="none"/></svg></div>
+          <div class="q-text">
+            <div class="qt">ListView.builder 사용</div>
+            <div class="qd">과제·시간표 목록은 builder 패턴으로 화면에 보이는 항목만 렌더링</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SLIDE 09 · CODE QUALITY + TESTS
+     목표: 20초
+============================ -->
+<section class="slide"
+  data-time="20"
+  data-notes="[20초] lint 45개·경고0건·AI리뷰 / 단위테스트 19케이스 전부 PASS / 통합테스트 앱기동·Hive초기화 / CI 자동실행">
+  <div class="reveal label">08 · 코드 품질 &amp; 테스트</div>
+  <h2 class="reveal h2">품질을 <em>수치</em>로 증명</h2>
+  <div class="reveal two-col">
+    <div class="panel">
+      <div class="panel-title">코드 품질 관리</div>
+      <div class="quality-list">
+        <div class="q-item">
+          <div class="q-icon" style="background:rgba(129,140,248,0.1);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+          <div class="q-text">
+            <div class="qt">Strict Lint (analysis_options.yaml)</div>
+            <div class="qd"><code>flutter analyze</code> 경고 0건 유지 · prefer_const_constructors · avoid_print 등 45개 규칙 적용</div>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-icon" style="background:rgba(129,140,248,0.1);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 3v5"/><circle cx="12" cy="3" r="1" fill="currentColor" stroke="none"/><circle cx="8.5" cy="14" r="1.5" fill="currentColor" stroke="none"/><circle cx="15.5" cy="14" r="1.5" fill="currentColor" stroke="none"/><line x1="9" y1="18" x2="15" y2="18"/></svg></div>
+          <div class="q-text">
+            <div class="qt">Claude Code AI 코드 리뷰</div>
+            <div class="qd">PR마다 /code-review 스킬 실행 → 보안·성능·패턴 이슈 자동 감지</div>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-icon" style="background:rgba(129,140,248,0.1);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></div>
+          <div class="q-text">
+            <div class="qt">GitHub Actions CI</div>
+            <div class="qd">push마다 flutter test + flutter analyze 자동 실행</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">테스트 결과</div>
+      <div style="margin-bottom:10px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-dim)">단위 테스트 (Unit Tests)</div>
+      <div class="test-result"><span class="test-pass">PASS</span><div><div class="test-name">출결 경계값 — 지각 3회=결석 1회, 25% 초과</div><div class="test-file">attendance_calculator_test.dart · 8 cases</div></div></div>
+      <div class="test-result"><span class="test-pass">PASS</span><div><div class="test-name">GPA 계산 — A+~F 9단계, 0~4.5 범위</div><div class="test-file">gpa_calculator_test.dart · 6 cases</div></div></div>
+      <div class="test-result"><span class="test-pass">PASS</span><div><div class="test-name">과제 D-Day — 날짜 차이, 만료 처리</div><div class="test-file">task_model_test.dart · 5 cases</div></div></div>
+      <div style="margin-top:14px;margin-bottom:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-dim)">통합 테스트 (Integration Tests)</div>
+      <div class="test-result"><span class="test-pass">PASS</span><div><div class="test-name">앱 기동 · 홈 화면 렌더링 · Hive 초기화</div><div class="test-file">app_test.dart (flutter test integration_test/)</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SLIDE 10 · ADR × 3
+     목표: 25초
+============================ -->
+<section class="slide"
+  data-time="20"
+  data-notes="[20초] ADR-001 Hive(TypeAdapter·오프라인) / ADR-002 Riverpod(컴파일타임 안전성) / ADR-003 Layered+MVVM(1인1주·최소추상화) → 질문=ADR기준 답변">
+  <div class="reveal label">09 · ADR — Architecture Decision Records (3건)</div>
+  <div class="reveal adr-list">
+    <div class="adr-card">
+      <div class="adr-header">
+        <span class="adr-num">ADR-001</span>
+        <span class="adr-status">ACCEPTED</span>
+        <div class="adr-title">저장소: Hive vs SQLite</div>
+      </div>
+      <div class="adr-context">SQLite는 관계형 스키마 마이그레이션 관리가 필요하고, 직렬화 코드를 수동으로 작성해야 한다. 앱은 서버 없이 단독 동작하며 간단한 Key-Value 저장이 주를 이룬다.</div>
+      <div class="adr-decision">✅ 결정: <strong>Hive 선택</strong> — TypeAdapter 코드 자동 생성, NoSQL Key-Value로 보일러플레이트 최소화, 오프라인 특화 빠른 읽기</div>
+      <div class="adr-consequence">트레이드오프: 복잡한 JOIN 쿼리 불가 → 앱 특성상 조인 불필요해 영향 없음</div>
+    </div>
+    <div class="adr-card">
+      <div class="adr-header">
+        <span class="adr-num">ADR-002</span>
+        <span class="adr-status">ACCEPTED</span>
+        <div class="adr-title">상태관리: Riverpod vs Provider</div>
+      </div>
+      <div class="adr-context">Provider는 BuildContext 의존성과 런타임 타입 오류 위험이 있다. Riverpod은 컴파일 타임에 타입을 검증하고 코드 생성으로 Provider 선언을 자동화한다.</div>
+      <div class="adr-decision">✅ 결정: <strong>Riverpod 2.x 선택</strong> — @riverpod 어노테이션 코드 생성, 컴파일 타임 안전성, Context 없는 Provider 접근</div>
+      <div class="adr-consequence">트레이드오프: build_runner 학습 비용 → 초기 설정 후 생산성 대폭 향상</div>
+    </div>
+    <div class="adr-card">
+      <div class="adr-header">
+        <span class="adr-num">ADR-003</span>
+        <span class="adr-status">ACCEPTED</span>
+        <div class="adr-title">아키텍처: Layered+MVVM vs Clean Architecture</div>
+      </div>
+      <div class="adr-context">Clean Architecture는 UseCase·Entity·Repository가 완전히 분리되어 팀·대규모 프로젝트에 적합하나 1인 1주 개발에는 추상화 레이어가 과도하다.</div>
+      <div class="adr-decision">✅ 결정: <strong>Layered + MVVM 선택</strong> — Presentation / Domain / Data / Core 4계층, 단방향 의존성, 최소 추상화</div>
+      <div class="adr-consequence">트레이드오프: 향후 팀 확장 시 Clean Architecture로 마이그레이션 필요 가능성 존재</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SLIDE 11 · APP STRUCTURE
+     목표: 20초
+============================ -->
+<section class="slide"
+  data-time="15"
+  data-notes="[15초] Presentation(Screen·Widget·Provider) / Domain(Entity·UseCase·Repo인터페이스) / Data(Hive구현체) / Core → Pres→Dom←Data, Domain은 Hive 모름">
+  <div class="reveal label">10 · 앱 구조 — 레이어 &amp; 디렉토리</div>
+  <h2 class="reveal h2">4레이어 <em>디렉토리 구조</em></h2>
+  <div class="reveal two-col-wide">
+    <div class="panel">
+      <div class="panel-title">lib/ 디렉토리 트리</div>
+      <div class="dir-tree">
+<span class="folder">lib/</span>
+├── <span class="folder">core/</span>          <span class="comment"># 공통 상수, 유틸, 테마</span>
+│   ├── <span class="file">constants.dart</span>
+│   └── <span class="file">theme.dart</span>
+├── <span class="folder">domain/</span>        <span class="comment"># 비즈니스 규칙 (외부 의존 없음)</span>
+│   ├── <span class="folder">entities/</span>    <span class="comment"># Course, Task, AcademicEvent …</span>
+│   ├── <span class="folder">usecases/</span>    <span class="comment"># 출결계산, GPA계산 순수 함수</span>
+│   └── <span class="folder">repositories/</span><span class="comment"># 인터페이스만 선언</span>
+├── <span class="folder">data/</span>          <span class="comment"># Hive 구현체</span>
+│   ├── <span class="folder">models/</span>      <span class="comment"># HiveType 어노테이션 엔티티</span>
+│   └── <span class="folder">repositories/</span><span class="comment"># Repository 구현 (Hive Box 사용)</span>
+├── <span class="folder">presentation/</span>  <span class="comment"># UI 레이어</span>
+│   ├── <span class="folder">screens/</span>     <span class="comment"># HomeScreen, TimetableScreen …</span>
+│   ├── <span class="folder">widgets/</span>     <span class="comment"># 재사용 위젯</span>
+│   └── <span class="folder">providers/</span>   <span class="comment"># Riverpod Provider (@riverpod)</span>
+└── <span class="file">main.dart</span>      <span class="comment"># Hive 초기화, ProviderScope</span>
+      </div>
+    </div>
+    <div>
+      <div class="layer-badges">
+        <div class="layer-badge pres"><div class="lname">Presentation</div><div class="ldesc">Screen · Widget · Riverpod Provider<br>사용자와 직접 소통, UI 상태 관리</div></div>
+        <div class="layer-badge dom"><div class="lname">Domain</div><div class="ldesc">Entity · UseCase · Repository interface<br>핵심 비즈니스 규칙, 외부 의존 0</div></div>
+        <div class="layer-badge data"><div class="lname">Data</div><div class="ldesc">Repository 구현체 · Hive TypeAdapter<br>저장소 구체 구현, Domain 인터페이스 충족</div></div>
+        <div class="layer-badge core"><div class="lname">Core</div><div class="ldesc">Theme · Constants · Utils<br>전 레이어에서 참조하는 공통 코드</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SLIDE 12 · DEV ENV + BUILD & DEPLOY
+     목표: 25초
+============================ -->
+<section class="slide"
+  data-time="20"
+  data-notes="[20초] 환경: Flutter3·FVM·VSCode / 빌드6단계: pub get → build_runner → flutter test → build apk → build ipa → Actions 자동배포">
+  <div class="reveal label">11 · 개발 환경 &amp; 빌드/배포</div>
+  <h2 class="reveal h2">환경 설정과 <em>빌드 파이프라인</em></h2>
+  <div class="reveal two-col">
+    <div class="panel">
+      <div class="panel-title">개발 환경 구성</div>
+      <div class="env-grid" style="grid-template-columns:1fr;gap:8px;">
+        <div class="env-item"><span class="ek">Flutter</span>3.x (Stable) — FVM으로 버전 고정</div>
+        <div class="env-item"><span class="ek">Dart</span>3.x (Null Safety 완전 적용)</div>
+        <div class="env-item"><span class="ek">IDE</span>VS Code + Flutter / Dart Extension</div>
+        <div class="env-item"><span class="ek">에뮬</span>Android Emulator (API 34) · iOS Simulator 17</div>
+        <div class="env-item"><span class="ek">버전관리</span>Git + GitHub (main 브랜치 보호)</div>
+        <div class="env-item"><span class="ek">AI Agent</span>Claude Code CLI (코드리뷰·AGENTS.md)</div>
+        <div class="env-item"><span class="ek">패키지</span>flutter_riverpod · hive_flutter · intl</div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">빌드 &amp; 배포 단계</div>
+      <div class="build-steps">
+        <div class="build-step"><span class="build-step-num">1</span><div class="build-step-content"><span class="cmd">flutter pub get</span><span class="desc">pubspec.yaml 의존성 설치</span></div></div>
+        <div class="build-step"><span class="build-step-num">2</span><div class="build-step-content"><span class="cmd">flutter pub run build_runner build</span><span class="desc">Hive TypeAdapter + Riverpod 코드 자동 생성</span></div></div>
+        <div class="build-step"><span class="build-step-num">3</span><div class="build-step-content"><span class="cmd">flutter test</span><span class="desc">단위 + 통합 테스트 전체 실행 (CI 포함)</span></div></div>
+        <div class="build-step"><span class="build-step-num">4</span><div class="build-step-content"><span class="cmd">flutter build apk --release</span><span class="desc">Android 릴리즈 APK 생성 (--split-per-abi)</span></div></div>
+        <div class="build-step"><span class="build-step-num">5</span><div class="build-step-content"><span class="cmd">flutter build ipa</span><span class="desc">iOS 릴리즈 IPA 생성 (Xcode Archive)</span></div></div>
+        <div class="build-step"><span class="build-step-num">6</span><div class="build-step-content"><span class="cmd">GitHub Actions → Pages 자동 배포</span><span class="desc">main push → 발표자료 자동 게시</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SLIDE 13 · GITHUB GUIDE + AI AGENT
+     목표: 20초
+============================ -->
+<section class="slide"
+  data-time="15"
+  data-notes="[15초] README 4단계 가이드 / AGENTS.md: rules·skills·commands·ADR·lint 단일MD 통합 → AI가 컨텍스트 없이 프로젝트 파악 (가산점)">
+  <div class="reveal label">12 · GitHub 설치 가이드 &amp; AI Agent 활용</div>
+  <h2 class="reveal h2">누구나 <em>4단계</em>로 실행</h2>
+  <div class="reveal two-col">
+    <div class="panel">
+      <div class="panel-title">README — 설치 가이드</div>
+      <div class="build-steps">
+        <div class="build-step"><span class="build-step-num">①</span><div class="build-step-content"><span class="cmd">git clone https://github.com/Denps04/Project_App</span><span class="desc">저장소 클론</span></div></div>
+        <div class="build-step"><span class="build-step-num">②</span><div class="build-step-content"><span class="cmd">fvm use &amp;&amp; flutter pub get</span><span class="desc">Flutter 버전 고정 + 의존성 설치</span></div></div>
+        <div class="build-step"><span class="build-step-num">③</span><div class="build-step-content"><span class="cmd">flutter pub run build_runner build</span><span class="desc">Hive · Riverpod 코드 생성</span></div></div>
+        <div class="build-step"><span class="build-step-num">④</span><div class="build-step-content"><span class="cmd">flutter run</span><span class="desc">에뮬레이터 / 실기기 실행</span></div></div>
+      </div>
+      <div style="margin-top:12px;padding:10px 12px;background:rgba(129,140,248,0.06);border:1px solid rgba(129,140,248,0.2);border-radius:6px;font-size:12px;color:var(--ink-dim);line-height:1.6;">
+        문서 체계: 기획서·요구사항 / WBS / ADR(아키텍처) / setup·deploy·testing / AGENTS.md + README
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">AGENTS.md — AI Agent 정책 파일 (가산점)</div>
+      <div class="quality-list">
+        <div class="q-item">
+          <div class="q-icon" style="background:rgba(129,140,248,0.12);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 3v5"/><circle cx="12" cy="3" r="1" fill="currentColor" stroke="none"/><circle cx="8.5" cy="14" r="1.5" fill="currentColor" stroke="none"/><circle cx="15.5" cy="14" r="1.5" fill="currentColor" stroke="none"/><line x1="9" y1="18" x2="15" y2="18"/></svg></div>
+          <div class="q-text">
+            <div class="qt">Claude Code 적극 활용</div>
+            <div class="qd">설계 단계: 아키텍처 결정 토론<br>개발 단계: /code-review 스킬로 PR 검토<br>문서화: AGENTS.md · README 자동 초안</div>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-icon" style="background:rgba(251,191,36,0.12);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2H5a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-4"/><rect x="9" y="0" width="6" height="4" rx="1"/><line x1="9" y1="10" x2="15" y2="10"/><line x1="9" y1="14" x2="15" y2="14"/></svg></div>
+          <div class="q-text">
+            <div class="qt">단일 MD 통합 정책 (본인 기법)</div>
+            <div class="qd">AGENTS.md 하나에 agent rules · skills · commands · ADR 참조 · lint 정책을 통합 → AI가 컨텍스트 없이도 프로젝트 파악 가능</div>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-icon" style="background:rgba(52,211,153,0.12);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+          <div class="q-text">
+            <div class="qt">LLM Wiki 기반 암묵지 관리</div>
+            <div class="qd">Claude Code 메모리 시스템으로 결정 맥락·시행착오를 프로젝트 메모리에 저장 → 미래 대화에서 재사용</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SLIDE 14 · UTILIZATION & IMPACT
+     목표: 20초
+============================ -->
+<section class="slide"
+  data-time="15"
+  data-notes="[15초] 출결 조기경보 / GPA 시뮬레이션 / D-Day 알림 → 향후: Push알림·LMS파싱">
+  <div class="reveal label">13 · 활용 방안 &amp; 기대 효과</div>
+  <h2 class="reveal h2">학생 삶을 <em>실질적으로</em> 바꾼다</h2>
+  <div class="reveal util-grid">
+    <div class="util-card">
+      <div class="util-card-num">3</div>
+      <div class="util-card-title">단계 출결 경고</div>
+      <div class="util-card-desc">안전·주의·위험 3단계로 결석 한도 초과 전에 조기 경보 → 학점 포기를 방지</div>
+    </div>
+    <div class="util-card">
+      <div class="util-card-num">4.5</div>
+      <div class="util-card-title">GPA 시뮬레이션</div>
+      <div class="util-card-desc">목표 GPA를 입력하면 남은 학기 필요 점수를 역산 → 학습 전략 수립</div>
+    </div>
+    <div class="util-card">
+      <div class="util-card-num">D-0</div>
+      <div class="util-card-title">과제 마감 알림</div>
+      <div class="util-card-desc">D-Day 카운트다운으로 마감 놓침 방지 · 우선순위 기반 정렬</div>
+    </div>
+    <div class="util-card">
+      <div class="util-card-num">∞</div>
+      <div class="util-card-title">향후 발전 방향</div>
+      <div class="util-card-desc">Push 알림 · 클라우드 동기화 · 학교 LMS 파싱 · 위젯(홈 화면) 연동</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SLIDE 15 · DEMO
+     목표: 30초 (데모)
+============================ -->
+<section class="slide"
+  data-time="30"
+  data-notes="[30초 데모] 홈→출결(결석추가→위험배지)→학점(A+A B+ → 4.2)→과제(D-1 완료) ★와이파이OFF → 전기능 정상 = 오프라인의 힘">
+  <div class="reveal label">14 · DEMO — 30초 사용자 시나리오</div>
+  <h2 class="reveal h2">오프라인, 그래도 <em>완벽히</em>.</h2>
+  <div class="reveal demo-layout">
+    <div class="phone-mockup">
+      <div class="phone-header">홈</div>
+      <div class="phone-section-title">오늘의 수업</div>
+      <div class="phone-card">
+        <div class="phone-card-dot">10</div>
+        <div class="phone-card-text">운영체제<small>10:00~12:00 · 공대 401호</small></div>
+      </div>
+      <div class="phone-card">
+        <div class="phone-card-dot" style="background:#ec4899">14</div>
+        <div class="phone-card-text">자료구조<small>14:00~16:00 · 정보관 201호</small></div>
+      </div>
+      <div class="phone-section-title">마감 임박 과제</div>
+      <div class="phone-card">
+        <div class="phone-card-dot warn">!</div>
+        <div class="phone-card-text">알고리즘 과제 #3<small>D-1 · 내일 23:59</small></div>
+      </div>
+      <div class="phone-section-title">출결 상태</div>
+      <div class="phone-card">
+        <div class="phone-card-dot" style="background:#ef4444">⚠</div>
+        <div class="phone-card-text">운영체제 — 위험<small>결석 3/4 · 한도 초과 임박</small></div>
+      </div>
+      <div class="phone-nav">
+        <span class="active">홈</span>
+        <span>시간표</span>
+        <span>학사</span>
+        <span>출결</span>
+        <span>학점</span>
+        <span>과제</span>
+      </div>
+    </div>
+    <div class="demo-points">
+      <h3>사용자 <em>시나리오</em></h3>
+      <ul>
+        <li><span class="num">01</span><div>홈 진입<small>오늘 수업 2개 + D-1 과제 + 출결 경고 한눈에</small></div></li>
+        <li><span class="num">02</span><div>출결 계산기<small>결석 추가 → 즉시 '위험' 빨간 배지로 전환</small></div></li>
+        <li><span class="num">03</span><div>학점 계산기<small>A+ A B+ 입력 → GPA 4.2 자동 계산</small></div></li>
+        <li><span class="num">04</span><div>과제 메모<small>D-1 항목 탭 → 완료 체크 → 리스트 갱신</small></div></li>
+        <li><span class="num">★</span><div>임팩트<small>네트워크 OFF 상태에서도 전 기능 정상 동작</small></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     SLIDE 16 · CLOSING
+     목표: 5초
+============================ -->
+<section class="slide closing"
+  data-time="5"
+  data-notes="[5초] 마무리 → 질문=ADR기준 답변 → 감사합니다">
+  <div class="reveal closing-tag">THANK YOU · 이준오</div>
+  <h1 class="reveal closing-title">질문,<br><em>환영합니다.</em></h1>
+  <p class="reveal closing-sub">흩어진 학사 정보를 하나로 — Univ Planner.</p>
+  <div class="reveal closing-info">
+    <div class="closing-info-item">
+      <strong>Repository</strong>
+      github.com/Denps04/Project_App
+    </div>
+    <div class="closing-info-item">
+      <strong>발표자료</strong>
+      Denps04.github.io/Project_App
+    </div>
+    <div class="closing-info-item">
+      <strong>ADR</strong>
+      ADR-001 · 002 · 003 답변 준비
+    </div>
+    <div class="closing-info-item">
+      <strong>Demo</strong>
+      실기기 즉시 시연 가능
+    </div>
+  </div>
+</section>
+
+</div><!-- /deck -->
+
+<!-- CONTROLS -->
 <div class="controls">
-  <span class="counter"><strong id="cur">1</strong> / <span id="total">7</span></span>
+  <span class="counter"><strong id="cur">1</strong> / <span id="total">16</span></span>
   <button class="nav-btn" onclick="prev()">←</button>
   <button class="nav-btn" onclick="next()">→</button>
 </div>
 
 <script>
-  // ===== Mermaid 초기화 =====
+  // ===== Mermaid =====
   mermaid.initialize({
     startOnLoad: true,
     theme: 'dark',
     themeVariables: {
-      primaryColor: '#1e1e2e',
-      primaryTextColor: '#f5f5f7',
-      primaryBorderColor: '#818cf8',
-      lineColor: '#818cf8',
-      secondaryColor: '#12121a',
-      tertiaryColor: '#0a0a0f',
-      background: '#0a0a0f',
-      mainBkg: '#1e1e2e',
-      nodeBorder: '#818cf8',
-      clusterBkg: '#12121a',
-      titleColor: '#f5f5f7',
-      edgeLabelBackground: '#0a0a0f',
-      fontFamily: 'Pretendard, sans-serif',
-      fontSize: '14px',
-      mindmapPadding: 16,
+      primaryColor: '#1e1e2e', primaryTextColor: '#f5f5f7',
+      primaryBorderColor: '#818cf8', lineColor: '#818cf8',
+      secondaryColor: '#12121a', tertiaryColor: '#0a0a0f',
+      background: '#0a0a0f', mainBkg: '#1e1e2e',
+      nodeBorder: '#818cf8', clusterBkg: '#12121a',
+      titleColor: '#f5f5f7', edgeLabelBackground: '#0a0a0f',
+      fontFamily: 'Pretendard, sans-serif', fontSize: '17px',
+      mindmapPadding: 14,
     },
-    mindmap: { padding: 16, maxWidth: 200 },
+    mindmap: { padding: 14, maxWidth: 180 },
     flowchart: { curve: 'basis', htmlLabels: true }
   });
 
-  // ===== 슬라이드 네비게이션 =====
+  // ===== 슬라이드 =====
   const slides = document.querySelectorAll('.slide');
   const total = slides.length;
   let current = 0;
-
   document.getElementById('total').textContent = total;
 
   function go(idx) {
@@ -956,6 +1023,7 @@ graph TD
     slides[current].classList.add('active');
     document.getElementById('cur').textContent = current + 1;
     document.getElementById('progress').style.width = ((current + 1) / total * 100) + '%';
+    updateNotes();
   }
 
   function next() { go(Math.min(current + 1, total - 1)); }
@@ -966,67 +1034,88 @@ graph TD
     if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
     if (e.key === 'Home') go(0);
     if (e.key === 'End') go(total - 1);
+    if (e.key === 'n' || e.key === 'N') toggleNotes();
     if (e.key === 'f' || e.key === 'F') document.documentElement.requestFullscreen?.();
     if (e.key === 't' || e.key === 'T') toggleTimer();
     if (e.key === 'r' || e.key === 'R') resetTimer();
   });
 
   document.getElementById('deck').addEventListener('click', (e) => {
-    if (e.target.closest('button, a, .controls, .timer-badge')) return;
+    if (e.target.closest('button, a, .controls, .timer-widget, .notes-panel')) return;
     next();
   });
 
   document.getElementById('progress').style.width = (1 / total * 100) + '%';
 
-  // ===== 2분 타이머 =====
+  // ===== 대사 패널 =====
+  let notesOpen = false;
+
+  function updateNotes() {
+    const txt = slides[current].dataset.notes || '';
+    document.getElementById('notesText').textContent = txt;
+  }
+
+  function toggleNotes() {
+    notesOpen = !notesOpen;
+    document.getElementById('notesPanel').classList.toggle('open', notesOpen);
+    updateNotes();
+  }
+
+  updateNotes();
+
+  // ===== 타이머 (5:00 카운트다운) =====
+  let timerSeconds = 300;
+  let timerRunning = false;
   let timerInterval = null;
-  let timeLeft = 120;
-  let running = false;
+  const timerDisplay = document.getElementById('timerDisplay');
+  const timerToggleBtn = document.getElementById('timerToggle');
 
   function formatTime(s) {
     const m = Math.floor(s / 60);
     const sec = s % 60;
-    return `${m}:${String(sec).padStart(2, '0')}`;
+    return m + ':' + String(sec).padStart(2, '0');
   }
 
   function updateTimerDisplay() {
-    const el = document.getElementById('timerDisplay');
-    el.textContent = formatTime(timeLeft);
-    el.className = 'timer-display';
-    if (timeLeft <= 30) el.classList.add('warn');
-    if (timeLeft <= 10) el.classList.add('danger');
+    timerDisplay.textContent = formatTime(timerSeconds);
+    timerDisplay.className = 'timer-display';
+    if (timerSeconds <= 30) timerDisplay.classList.add('danger');
+    else if (timerSeconds <= 60) timerDisplay.classList.add('warn');
   }
 
   function toggleTimer() {
-    if (running) {
+    if (timerRunning) {
       clearInterval(timerInterval);
-      running = false;
-      document.getElementById('timerBtn').textContent = 'START';
+      timerRunning = false;
+      timerToggleBtn.textContent = '▶';
     } else {
-      running = true;
-      document.getElementById('timerBtn').textContent = 'STOP';
+      timerRunning = true;
+      timerToggleBtn.textContent = '⏸';
       timerInterval = setInterval(() => {
-        if (timeLeft <= 0) {
+        if (timerSeconds > 0) {
+          timerSeconds--;
+          updateTimerDisplay();
+        } else {
           clearInterval(timerInterval);
-          running = false;
-          document.getElementById('timerBtn').textContent = 'START';
-          document.getElementById('timerDisplay').textContent = '0:00';
-          return;
+          timerRunning = false;
+          timerToggleBtn.textContent = '▶';
+          timerDisplay.classList.add('danger');
         }
-        timeLeft--;
-        updateTimerDisplay();
       }, 1000);
     }
   }
 
   function resetTimer() {
     clearInterval(timerInterval);
-    running = false;
-    timeLeft = 120;
-    document.getElementById('timerBtn').textContent = 'START';
+    timerRunning = false;
+    timerToggleBtn.textContent = '▶';
+    timerSeconds = 300;
     updateTimerDisplay();
   }
-</script>
 
+  document.getElementById('timerToggle').addEventListener('click', toggleTimer);
+  document.getElementById('timerReset').addEventListener('click', resetTimer);
+  updateTimerDisplay();
+</script>
 </body>
 </html>
