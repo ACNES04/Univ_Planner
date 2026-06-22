@@ -26,20 +26,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Detect Flutter app directory
-        id: appdir
+      - name: Verify univ_planner app exists
         shell: bash
         run: |
-          if [ -f "pubspec.yaml" ]; then
-            echo "app_dir=." >> "$GITHUB_OUTPUT"
-            echo "build_dir=build/web" >> "$GITHUB_OUTPUT"
-          elif [ -f "univ_planner/pubspec.yaml" ]; then
-            echo "app_dir=univ_planner" >> "$GITHUB_OUTPUT"
-            echo "build_dir=univ_planner/build/web" >> "$GITHUB_OUTPUT"
-          else
-            echo "Could not find pubspec.yaml in root or univ_planner/" >&2
+          test -f univ_planner/pubspec.yaml || {
+            echo "univ_planner/pubspec.yaml not found" >&2
             exit 1
-          fi
+          }
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -47,11 +40,11 @@ jobs:
           channel: stable
 
       - name: Install dependencies
-        working-directory: ${{ steps.appdir.outputs.app_dir }}
+        working-directory: univ_planner
         run: flutter pub get
 
       - name: Build Flutter web
-        working-directory: ${{ steps.appdir.outputs.app_dir }}
+        working-directory: univ_planner
         run: flutter build web --release --base-href /Univ_Planner/
 
       - name: Setup Pages
@@ -60,7 +53,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ steps.appdir.outputs.build_dir }}
+          path: univ_planner/build/web
 
       - name: Deploy to GitHub Pages
         id: deployment
